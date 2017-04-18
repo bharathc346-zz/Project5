@@ -3,7 +3,9 @@
  */
 package prj5;
 
+import java.awt.Color;
 import CS2114.Button;
+import CS2114.Shape;
 import CS2114.Window;
 import CS2114.WindowSide;
 
@@ -29,14 +31,22 @@ public class DisplayWindow
     private Button region;
     private Button quit;
     
+    private Shape legend;
+    
     /**
      * Creates a new program window with user buttons
      */
     public DisplayWindow()
     {
         window = new Window("Project 5");
+        window.setSize(1350, 700);
         
         setUpButtons();
+        
+        legend = new Shape(500, 600, 150, 200);
+        legend.setForegroundColor(Color.BLACK);
+        legend.setBackgroundColor(Color.WHITE);
+        window.addShape(legend);
     }
     
     /**
@@ -77,7 +87,7 @@ public class DisplayWindow
         major.onClick(this, "clickedMajor");
         
         region = new Button("Region");
-        window.addButton(region, WindowSide.NORTH);
+        window.addButton(region, WindowSide.SOUTH);
         region.onClick(this, "clickedRegion");
         
         quit = new Button("Quit");
