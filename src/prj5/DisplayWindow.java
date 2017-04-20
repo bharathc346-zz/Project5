@@ -32,12 +32,15 @@ public class DisplayWindow
     private Button region;
     private Button quit;
     
+    //fields for the legend graphics
     private Shape legend;
     private TextShape lheader;
     private TextShape line1;
     private TextShape line2;
     private TextShape line3;
     private TextShape line4;
+    private Shape lbar;
+    private TextShape lbartext;
     
     /**
      * Creates a new program window with user buttons
@@ -57,42 +60,52 @@ public class DisplayWindow
      */
     private void setUpButtons()
     {
+        //button to move to the previous set of glyphs
         prev = new Button("<-- Prev");
         window.addButton(prev, WindowSide.NORTH);
         prev.onClick(this, "clickedPrev");
         
+        //button to sort the glyphs by artist
         sortArtist = new Button("Sort by Artist");
         window.addButton(sortArtist, WindowSide.NORTH);
         sortArtist.onClick(this, "clickedSortArtist");
         
+        //button to sort the glyphs by title
         sortTitle = new Button("Sort by Title");
         window.addButton(sortTitle, WindowSide.NORTH);
         sortTitle.onClick(this, "clickedSortTitle");
         
+        //button to sort the glyphs by year
         sortYear = new Button("Sort by Year");
         window.addButton(sortYear, WindowSide.NORTH);
         sortYear.onClick(this, "clickedSortYear");
         
+        //button to sort the glyphs by genre
         sortGenre = new Button("Sort by Genre");
         window.addButton(sortGenre, WindowSide.NORTH);
         sortGenre.onClick(this, "clickedSortGenre");
         
+        //button to show the next set of glyphs
         next = new Button("Next -->");
         window.addButton(next, WindowSide.NORTH);
         next.onClick(this, "clickedNext");
         
+        //button to show the glyphs based on hobbies
         hobby = new Button("Hobby");
         window.addButton(hobby, WindowSide.SOUTH);
         hobby.onClick(this, "clickedNext");
         
+        //button to show the glyphs based on major
         major = new Button("Major");
         window.addButton(major, WindowSide.SOUTH);
         major.onClick(this, "clickedMajor");
         
+        //button to show the glyphs based on region
         region = new Button("Region");
         window.addButton(region, WindowSide.SOUTH);
         region.onClick(this, "clickedRegion");
         
+        //button to quit out of the program
         quit = new Button("Quit");
         window.addButton(quit, WindowSide.SOUTH);
         quit.onClick(this, "clickedQuit");
@@ -144,6 +157,22 @@ public class DisplayWindow
         window.addShape(line4);
         window.moveToFront(line4);
         line4.setBackgroundColor(Color.WHITE);
+        
+        //creates the bar to mimic the glyph bar
+        lbar = new Shape(window.getGraphPanelWidth() - 95,
+                window.getGraphPanelHeight() - 80, 8, 50);
+        window.addShape(lbar);
+        lbar.setBackgroundColor(Color.BLACK);
+        lbar.setForegroundColor(Color.WHITE);
+        
+        //creates the text on either side of the bar to signal which side
+        //represents what
+        lbartext = new TextShape(lbar.getX() - 50, lbar.getY() + 17,
+                "Heard      Likes", Color.BLACK);
+        window.addShape(lbartext);
+        window.moveToFront(lbartext);
+        window.moveToFront(lbar); //moves the bar in front of the text
+        lbartext.setBackgroundColor(Color.WHITE);
     }
     
     /**
