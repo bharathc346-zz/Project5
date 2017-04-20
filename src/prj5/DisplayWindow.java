@@ -6,6 +6,7 @@ package prj5;
 import java.awt.Color;
 import CS2114.Button;
 import CS2114.Shape;
+import CS2114.TextShape;
 import CS2114.Window;
 import CS2114.WindowSide;
 
@@ -32,6 +33,11 @@ public class DisplayWindow
     private Button quit;
     
     private Shape legend;
+    private TextShape lheader;
+    private TextShape line1;
+    private TextShape line2;
+    private TextShape line3;
+    private TextShape line4;
     
     /**
      * Creates a new program window with user buttons
@@ -43,10 +49,7 @@ public class DisplayWindow
         
         setUpButtons();
         
-        legend = new Shape(500, 600, 150, 200);
-        legend.setForegroundColor(Color.BLACK);
-        legend.setBackgroundColor(Color.WHITE);
-        window.addShape(legend);
+        setUpLegend();
     }
     
     /**
@@ -93,6 +96,54 @@ public class DisplayWindow
         quit = new Button("Quit");
         window.addButton(quit, WindowSide.SOUTH);
         quit.onClick(this, "clickedQuit");
+    }
+    
+    /**
+     * helper method to create and place all the legend graphic items
+     */
+    private void setUpLegend()
+    {
+        //creates the border for the legend
+        legend = new Shape(window.getGraphPanelWidth()-160, 
+                window.getGraphPanelHeight()-210, 150, 200);
+        legend.setForegroundColor(Color.BLACK);
+        legend.setBackgroundColor(Color.WHITE);
+        window.addShape(legend);
+        
+        //creates the legend header
+        lheader = new TextShape(window.getGraphPanelWidth() - 115, 
+                window.getGraphPanelHeight() - 190, "Legend", Color.BLACK);
+        window.addShape(lheader);
+        window.moveToFront(lheader);
+        lheader.setBackgroundColor(Color.WHITE);
+        
+        //creates the first line in the legend
+        line1 = new TextShape(window.getGraphPanelWidth() - 120, 
+                window.getGraphPanelHeight() - 160, "Area 1", Color.MAGENTA);
+        window.addShape(line1);
+        window.moveToFront(line1);
+        line1.setBackgroundColor(Color.WHITE);
+        
+        //creates the second line in the legend
+        line2 = new TextShape(window.getGraphPanelWidth() - 120, 
+                window.getGraphPanelHeight() - 140, "Area 2", Color.BLUE);
+        window.addShape(line2);
+        window.moveToFront(line2);
+        line2.setBackgroundColor(Color.WHITE);
+        
+        //creates the third line in the legend
+        line3 = new TextShape(window.getGraphPanelWidth() - 120, 
+                window.getGraphPanelHeight() - 120, "Area 3", Color.ORANGE);
+        window.addShape(line3);
+        window.moveToFront(line3);
+        line3.setBackgroundColor(Color.WHITE);
+        
+        //creates the fourth line in the legend
+        line4 = new TextShape(window.getGraphPanelWidth() - 120, 
+                window.getGraphPanelHeight() - 100, "Area 4", Color.GREEN);
+        window.addShape(line4);
+        window.moveToFront(line4);
+        line4.setBackgroundColor(Color.WHITE);
     }
     
     /**
