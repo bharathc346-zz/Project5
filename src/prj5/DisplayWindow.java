@@ -42,6 +42,15 @@ public class DisplayWindow
     private Shape lbar;
     private TextShape lbartext;
     
+    //fields for an example glyph until further
+    //functions have been implemented
+    private TextShape glyphheader;
+    private Shape centerbar;
+    private Shape bar1;
+    private Shape bar2;
+    private Shape bar3;
+    private Shape bar4;
+    
     /**
      * Creates a new program window with user buttons
      */
@@ -53,6 +62,8 @@ public class DisplayWindow
         setUpButtons();
         
         setUpLegend();
+        
+        setUpExampleGlyph();
     }
     
     /**
@@ -173,6 +184,32 @@ public class DisplayWindow
         window.moveToFront(lbartext);
         window.moveToFront(lbar); //moves the bar in front of the text
         lbartext.setBackgroundColor(Color.WHITE);
+    }
+    
+    /**
+     * sets up an example glyph
+     */
+    private void setUpExampleGlyph()
+    {
+        glyphheader = new TextShape(120, 80, "Example Glyph", Color.BLACK);
+        window.addShape(glyphheader);
+        glyphheader.setBackgroundColor(Color.WHITE);
+        
+        bar1 = new Shape(100, 100, 100, 20, Color.MAGENTA);
+        window.addShape(bar1);
+        
+        bar2 = new Shape(120, 120, 130, 20, Color.BLUE);
+        window.addShape(bar2);
+        
+        bar3 = new Shape(100, 140, 140, 20, Color.ORANGE);
+        window.addShape(bar3);
+        
+        bar4 = new Shape(110, 160, 160, 20, Color.GREEN);
+        window.addShape(bar4);
+        
+        centerbar = new Shape(170, 100, 10, 80, Color.BLACK);
+        window.addShape(centerbar);
+        window.moveToFront(centerbar);
     }
     
     /**
