@@ -1,44 +1,126 @@
+/**
+ * 
+ */
 package prj5;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
- * TODO
- * @author 
- *
+ * @author bharathchintagunta
+ * @version 04.19.17
  */
 public class Student {
     private int id;
-    private int date;
+    private String date;
     private String major;
+    private String region;
     private String hobby;
-    private List<Boolean> heardData;
-    private List<Boolean> likesData;
+    private ArrayList<String> heardData;
+    private ArrayList<String> likedData;
+
+
     /**
      * Constructor
-     * @param id
-     * @param date
-     * @param major
-     * @param hobby
-     * @param heard
-     * @param likes
-     */
-    public Student(int id, int date, String major, String hobby, boolean heard, boolean likes)
-    {
-        this.id = id;
-        this.date = date;
-        this.major = major;
-        this.hobby = hobby;
-        heardData.add(heard);
-        likesData.add(likes);
-    }
-    /**
      * 
-     * @param person
-     * @return
+     * @param i
+     *            id
+     * @param d
+     *            date
+     * @param m
+     *            major
+     * @param r
+     *            region
+     * @param h
+     *            hobby
+     * @param heard
+     *            list of heard
+     * @param liked
+     *            list of liked
      */
-    public int compareTo(Student person)
-    {
-        return 0;
+    public Student(int i, String d, String m, String r, String h) {
+        this.id = i;
+        this.date = d;
+        this.major = m;
+        this.region = r;
+        this.hobby = h;
+        this.heardData = new ArrayList<String>();
+        this.likedData = new ArrayList<String>();
     }
+
+
+    /**
+     * get id
+     * 
+     * @return id
+     */
+    public int getId() {
+        return this.id;
+    }
+
+
+    /**
+     * get date
+     * 
+     * @return date
+     */
+    public String getDate() {
+        return this.date;
+    }
+
+
+    /**
+     * get major
+     * 
+     * @return major
+     */
+    public String getMajor() {
+        return this.major;
+    }
+
+
+    /**
+     * get region
+     * 
+     * @return region
+     */
+    public String getRegion() {
+        return this.region;
+    }
+
+
+    /**
+     * get hobby
+     * 
+     * @return hobby
+     */
+    public String getHobby() {
+        return this.hobby;
+    }
+
+
+    /**
+     * get heard data
+     * 
+     * @return heardData
+     */
+    public ArrayList<String> getHeardData() {
+        return this.heardData;
+    }
+
+
+    /**
+     * get liked data
+     * 
+     * @return likedData
+     */
+    public ArrayList<String> getLikedData() {
+        return this.likedData;
+    }
+
+
+    public String toString() {
+        return "id: " + this.id + "\nheardData: " + this.heardData.toString()
+            + "\nliked: " + this.likedData;
+    }
+
 }
