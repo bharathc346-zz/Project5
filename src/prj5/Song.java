@@ -5,14 +5,21 @@ package prj5;
 
 /**
  * @author bharathchintagunta
+<<<<<<< HEAD
  * @version 2017-04-20
  */
 public class Song {
 
+=======
+ * @verison 04.19.17
+ */
+public class Song {
+>>>>>>> origin/master
     private String name;
     private String artist;
     private int year;
     private String genre;
+<<<<<<< HEAD
 
     private int sportsHeardPercent;
     private int sportsLikedPercent;
@@ -53,6 +60,15 @@ public class Song {
      *            year
      * @param g
      *            genre
+=======
+    
+    /**
+     * Song Constructor
+     * @param n name
+     * @param a artist
+     * @param y year
+     * @param g genre
+>>>>>>> origin/master
      */
     public Song(String n, String a, int y, String g) {
         this.name = n;
@@ -60,16 +76,23 @@ public class Song {
         this.year = y;
         this.genre = g;
     }
+<<<<<<< HEAD
 
 
     /**
      * getName of song
      * 
+=======
+    
+    /**
+     * getName of song
+>>>>>>> origin/master
      * @return song name
      */
     public String getName() {
         return this.name;
     }
+<<<<<<< HEAD
 
 
     /**
@@ -85,21 +108,41 @@ public class Song {
     /**
      * get year
      * 
+=======
+    
+    /**
+     * get Artist
+     * @return artist
+     */
+    public String getArtist() {
+        return this.artist;       
+    }
+    
+    /**
+     * get year
+>>>>>>> origin/master
      * @return year
      */
     public int getYear() {
         return this.year;
     }
+<<<<<<< HEAD
 
 
     /**
      * get genre
      * 
+=======
+    
+    /**
+     * get genre
+>>>>>>> origin/master
      * @return genre
      */
     public String getGenre() {
         return this.genre;
     }
+<<<<<<< HEAD
 
 
     /**
@@ -608,4 +651,8 @@ public class Song {
     public void setUsLikedPercent(int usLikedPercent) {
         this.usLikedPercent = usLikedPercent;
     }
+=======
+    
+    
+>>>>>>> origin/master
 }

@@ -63,9 +63,13 @@ public class DisplayWindow
         
         setUpLegend();
         
+<<<<<<< HEAD
         new Glyph(400, 400, window);
         
         //setUpExampleGlyph();
+=======
+        setUpExampleGlyph();
+>>>>>>> origin/master
     }
     
     /**

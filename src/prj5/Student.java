@@ -32,6 +32,13 @@ public class Student {
      *            region
      * @param h
      *            hobby
+<<<<<<< HEAD
+=======
+     * @param heard
+     *            list of heard
+     * @param liked
+     *            list of liked
+>>>>>>> origin/master
      */
     public Student(int i, String d, String m, String r, String h) {
         this.id = i;
@@ -95,6 +102,7 @@ public class Student {
 
 
     /**
+<<<<<<< HEAD
      * set heard data
      * 
      * @param s
@@ -117,6 +125,8 @@ public class Student {
 
 
     /**
+=======
+>>>>>>> origin/master
      * get heard data
      * 
      * @return heardData
@@ -135,4 +145,13 @@ public class Student {
         return this.likedData;
     }
 
+<<<<<<< HEAD
+=======
+
+    public String toString() {
+        return "id: " + this.id + "\nheardData: " + this.heardData.toString()
+            + "\nliked: " + this.likedData;
+    }
+
+>>>>>>> origin/master
 }

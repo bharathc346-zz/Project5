@@ -4,12 +4,16 @@ import java.util.LinkedList;
 
 /**
  * Sort the data by different archtypes
+<<<<<<< HEAD
  * 
+=======
+>>>>>>> origin/master
  * @author Group48
  *
  */
 public class DataSorter {
     private LinkedList<Glyph> glyphs;
+<<<<<<< HEAD
 
 
     /**
@@ -121,6 +125,55 @@ public class DataSorter {
 
 
         public Glyph next() {
+=======
+    
+    public void sortByArtist()
+    {
+        
+    }
+    
+    public void sortByTitle()
+    {
+        
+    }
+    
+    public void sortByYear()
+    {
+        
+    }
+    
+    public void sortByGenre()
+    {
+        
+    }
+    
+    public LinkedList<Glyph> getList()
+    {
+        return glyphs;
+    }
+    
+    public DataSorterIterator iterator()
+    {
+        return new DataSorterIterator();
+    }
+    
+    class DataSorterIterator
+    {
+        private int index;
+        
+        public DataSorterIterator()
+        {
+            index = 0;
+        }
+        
+        public boolean hasNext()
+        {
+            return false;
+        }
+        
+        public Glyph next()
+        {
+>>>>>>> origin/master
             return null;
         }
     }

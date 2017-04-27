@@ -1,10 +1,14 @@
 package prj5;
 
+<<<<<<< HEAD
 import java.awt.Color;
 import java.util.LinkedList;
 import CS2114.Shape;
 import CS2114.TextShape;
 import CS2114.Window;
+=======
+import java.util.LinkedList;
+>>>>>>> origin/master
 
 /**
  * TODO
@@ -18,6 +22,7 @@ public class Glyph {
     private LinkedList<Student> students;
     private Category category;
     
+<<<<<<< HEAD
     //graphic fields for the glyph
     private TextShape songTitle;
     private TextShape bottom;
@@ -84,6 +89,11 @@ public class Glyph {
         likedGreen = new Shape(xCoord + sepWidth, yCoord - 20,
             likedGreenLength, barHeight, Color.GREEN);
         window.addShape(likedGreen);
+=======
+    public Glyph(Song song)
+    {
+        this.song = song;
+>>>>>>> origin/master
     }
     
     public Song getSong()
