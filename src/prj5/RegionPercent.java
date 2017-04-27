@@ -1,203 +1,182 @@
-/**
- * 
- */
 package prj5;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Comparator;
 
 /**
- * @author bharathchintagunta
+ * Region Percent Class
+ * 
+ * @author group48
+ * @version 4/27/2017
  *
  */
-public class RegionPercent {
+public class RegionPercent implements Comparator<String> {
+    // ~ Fields
+    private int[][] heard;
+    private int[][] like;
+
+
+    // ~ Constructor
     /**
-    * helper method
-    * Calc perc Heard for region
-    * 
-    * @param studentList
-    *            list of studdnts
-    * @param major
-    *            hobby to calc percent
-    * @return
-    */
-   private static int[] calcPercRegionHeard(
-       LinkedList<Student> studentList,
-       LinkedList<Song> songList,
-       String region) {
-       ArrayList<String> heardData = new ArrayList<String>();
-       // build arraylist of all responses in all region heard datas
-       for (int i = 0; i < studentList.size(); i++) {
-           if (studentList.get(i).getRegion().equals(region)) {
-               for (int j = 0; j < studentList.get(i).getHeardData()
-                   .size(); j++) {
-                   // add elements from each major students heard data
-                   heardData.add(studentList.get(i).getHeardData().get(j));
-               }
-
-           }
-       }
-
-       int[] yesHeardData = new int[songList.size()];
-       int[] noHeardData = new int[songList.size()];
-
-       int j = 0;
-       // increment yes's in corresponding indices in yesHeardData
-       for (int i = 0; i < heardData.size(); i++) {
-           if (j % songList.size() == 0) {
-               j = 0;
-           }
-           if (heardData.get(i).equals("Yes")) {
-               yesHeardData[j]++;
-           }
-           else if (heardData.get(i).equals("No")) {
-               noHeardData[j]++;
-           }
-           j++;
-       }
-       int[] percArray = new int[songList.size()];
-       // Calculate percents and put in array
-       for (int i = 0; i < percArray.length; i++) {
-           int total = yesHeardData[i] + noHeardData[i];
-           if (total != 0) {
-               int percentHeard = (yesHeardData[i] * 100) / total;
-               percArray[i] = percentHeard;
-           }
-       }
-       LinkedList<Student> regionStudent = new LinkedList<Student>();
-       for (int i = 0; i < studentList.size(); i++) {
-           if (studentList.get(i).getHobby().equals(region)) {
-               regionStudent.add(studentList.get(i));
-           }
-       }
-       return percArray;
-   }
+     * new a RegionCount
+     */
+    public RegionPercent() {
+        heard = new int[4][2];
+        like = new int[4][2];
+    }
 
 
-   /**
-    * helper method
-    * calculate percentages for respective major
-    * 
-    * @param studentList
-    *            list of students
-    * @param hobby
-    *            major to calc percentage for
-    * @return percent
-    */
-   private static int[] calcPercRegionLiked(
-       LinkedList<Student> studentList,
-       LinkedList<Song> songList,
-       String region) {
-       ArrayList<String> likedData = new ArrayList<String>();
-       // build arraylist of all responses in all math heard datas
-       for (int i = 0; i < studentList.size(); i++) {
-           if (studentList.get(i).getRegion().equals(region)) {
-               for (int j = 0; j < studentList.get(i).getLikedData()
-                   .size(); j++) {
-                   // add elements from each sports students heard data
-                   likedData.add(studentList.get(i).getLikedData().get(j));
-               }
+    // ~ Methods
+    /**
+     * Increment the results
+     * 
+     * @param region
+     *            represent the region of a student
+     * @param answerHeard
+     *            whether that student has heard this song or not
+     * @param answerLike
+     *            whether that student likes that song or not
+     */
+    public void increment(
+        String region,
+        String answerHeard,
+        String answerLike) {
+        heard(region, answerHeard);
+        like(region, answerLike);
 
-           }
-       }
-
-       int[] yesLikedData = new int[songList.size()];
-       int[] noLikedData = new int[songList.size()];
-
-       int j = 0;
-       // increment yes's in corresponding indices in yesHeardData
-       for (int i = 0; i < likedData.size(); i++) {
-           if (j % songList.size() == 0) {
-               j = 0;
-           }
-           if (likedData.get(i).equals("Yes")) {
-               yesLikedData[j]++;
-           }
-           else if (likedData.get(i).equals("No")) {
-               noLikedData[j]++;
-           }
-           j++;
-       }
-       int[] percArray = new int[songList.size()];
-       // Calculate percents and put in array
-       for (int i = 0; i < percArray.length; i++) {
-           int total = yesLikedData[i] + noLikedData[i];
-           if (total != 0) {
-               int percentHeard = (yesLikedData[i] * 100) / total;
-               percArray[i] = percentHeard;
-           }
-       }
-       LinkedList<Student> regionStudent = new LinkedList<Student>();
-       for (int i = 0; i < studentList.size(); i++) {
-           if (studentList.get(i).getHobby().equals(region)) {
-               regionStudent.add(studentList.get(i));
-           }
-       }
-       return percArray;
-   }
+    }
 
 
-   /**
-    * iniitalize percentages in song object 
-    * 
-    * @param studentList
-    *            list of students
-    * @param songList
-    *            list of songs
-    */
-   public static void setPercentSongs(
-       LinkedList<Student> studentList,
-       LinkedList<Song> songList) {
-       // Calc percentages heard and liked for southeast
-       int[] seHP = calcPercRegionHeard(studentList, songList, "Southeast");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setSeHeardPercent(seHP[i]);
-       }
+    /**
+     * increase the heard part
+     * 
+     * @param region
+     *            represents the region of the student
+     * @param answer
+     *            answer to like or not
+     */
+    private void heard(String region, String answer) {
+        if (compare(region, "Northeast") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[0][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                heard[0][0]++;
+            }
+        }
+        else if (compare(region, "Southeast") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[1][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                heard[1][0]++;
+            }
+        }
+        else if (compare(region,
+            "United States (other than Southeast or Northwest)") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[2][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                heard[2][0]++;
+            }
+        }
+        else if (compare(region, "Outside of United States") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[3][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                heard[3][0]++;
+            }
+        }
+    }
 
-       int[] seLP = calcPercRegionLiked(studentList, songList, "Southeast");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setSeLikedPercent(seLP[i]);
-       }
 
-       // Calc percentages heard and liked for northeast
-       int[] neHP = calcPercRegionHeard(studentList, songList, "Northeast");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setNeHeardPercent(neHP[i]);
-       }
+    /**
+     * Increase the like part.
+     * 
+     * @param region
+     *            the student's region
+     * @param answer
+     *            answer to like or not
+     */
+    private void like(String region, String answer) {
+        if (compare(region, "Northeast") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[0][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                like[0][0]++;
+            }
+        }
+        else if (compare(region, "Southeast") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[1][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                like[1][0]++;
+            }
+        }
+        else if (compare(region,
+            "United States (other than Southeast or Northwest)") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[2][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                like[2][0]++;
+            }
+        }
+        else if (compare(region, "Outside of United States") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[3][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                like[3][0]++;
+            }
+        }
+    }
 
-       int[] neLP = calcPercRegionLiked(studentList, songList, "Northeast");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setNeLikedPercent(neLP[i]);
-       }
 
-       // Calc percentages heard and liked for United States 
-       int[] usHP = calcPercRegionHeard(studentList, songList, "United States (other than Southeast or Northwest)");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setUsHeardPercent(usHP[i]);
-       }
+    /**
+     * get the heard or not results in percentages
+     * 
+     * @return the heard or not results
+     */
+    public int[] getHeard() {
+        int[] result = new int[4];
+        result[0] = (int)((1.0 * heard[0][1] / (heard[0][0] + heard[0][1]))
+            * 100);
+        result[1] = (int)((1.0 * heard[1][1] / (heard[1][0] + heard[1][1]))
+            * 100);
+        result[2] = (int)((1.0 * heard[2][1] / (heard[2][0] + heard[2][1]))
+            * 100);
+        result[3] = (int)((1.0 * heard[3][1] / (heard[3][0] + heard[3][1]))
+            * 100);
+        return result;
+    }
 
-       int[] usLP = calcPercRegionLiked(studentList, songList, "United States (other than Southeast or Northwest)");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setUsLikedPercent(usLP[i]);
-       }
 
-       // Calc percentages heard and liked for Outside of United States
-       int[] oHP = calcPercRegionHeard(studentList, songList, "Outside of United States");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setInlHeardPercent(oHP[i]);
-       }
+    /**
+     * get the like or not results
+     * 
+     * @return the like or not results
+     */
+    public int[] getLike() {
+        int[] result = new int[4];
+        result[0] = (int)((1.0 * like[0][1] / (like[0][0] + like[0][1])) * 100);
+        result[1] = (int)((1.0 * like[1][1] / (like[1][0] + like[1][1])) * 100);
+        result[2] = (int)((1.0 * like[2][1] / (like[2][0] + like[2][1])) * 100);
+        result[3] = (int)((1.0 * like[3][1] / (like[3][0] + like[3][1])) * 100);
+        return result;
+    }
 
-       int[] oLP = calcPercRegionLiked(studentList, songList, "Outside of United States");
-       for (int i = 0; i < songList.size(); i++) {
-           Song cur = songList.get(i);
-           cur.setInlLikedPercent(oLP[i]);
-       }
-   }
+
+    /**
+     * Compare method
+     * 
+     * @return Int based on the two strings
+     */
+    @Override
+    public int compare(String region, String question) {
+        return region.compareTo(question);
+    }
 }

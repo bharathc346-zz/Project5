@@ -1,204 +1,176 @@
-/**
- * 
- */
 package prj5;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Comparator;
 
 /**
- * @author bharathchintagunta
- *
+ * Class for Major Percent
+ * 
+ * @author group48
+ * @version 04.27.2017
  */
-public class MajorPercent {
+public class MajorPercent implements Comparator<String> {
+    // ~ Fields
+    private int[][] like;
+    private int[][] heard;
+
+
+    // ~ Constructor
     /**
-     * helper method
-     * Calc perc Heard for major
+     * new a majorCount
+     */
+    public MajorPercent() {
+        like = new int[4][2];
+        heard = new int[4][2];
+    }
+
+
+    // ~ Methods
+    /**
+     * Increment the results
      * 
-     * @param studentList
-     *            list of studdnts
      * @param major
-     *            hobby to calc percent
-     * @return
+     *            represent the major of a student
+     * @param answerHeard
+     *            whether that student has heard this song or not
+     * @param answerLike
+     *            whether that student likes that song or not
      */
-    private static int[] calcPercMajorHeard(
-        LinkedList<Student> studentList,
-        LinkedList<Song> songList,
-        String major) {
-        ArrayList<String> heardData = new ArrayList<String>();
-        // build arraylist of all responses in all major heard datas
-        for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getMajor().equals(major)) {
-                for (int j = 0; j < studentList.get(i).getHeardData()
-                    .size(); j++) {
-                    // add elements from each major students heard data
-                    heardData.add(studentList.get(i).getHeardData().get(j));
-                }
+    public void increment(String major, String answerHeard, String answerLike) {
+        heard(major, answerHeard);
+        like(major, answerLike);
 
-            }
-        }
-
-        int[] yesHeardData = new int[songList.size()];
-        int[] noHeardData = new int[songList.size()];
-
-        int j = 0;
-        // increment yes's in corresponding indices in yesHeardData
-        for (int i = 0; i < heardData.size(); i++) {
-            if (j % songList.size() == 0) {
-                j = 0;
-            }
-            if (heardData.get(i).equals("Yes")) {
-                yesHeardData[j]++;
-            }
-            else if (heardData.get(i).equals("No")) {
-                noHeardData[j]++;
-            }
-            j++;
-        }
-        int[] percArray = new int[songList.size()];
-        // Calculate percents and put in array
-        for (int i = 0; i < percArray.length; i++) {
-            int total = yesHeardData[i] + noHeardData[i];
-            if (total != 0) {
-                int percentHeard = (yesHeardData[i] * 100) / total;
-                percArray[i] = percentHeard;
-            }
-        }
-        LinkedList<Student> majorStudent = new LinkedList<Student>();
-        for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getHobby().equals(major)) {
-                majorStudent.add(studentList.get(i));
-            }
-        }
-        return percArray;
     }
 
 
     /**
-     * helper method
-     * calculate percentages for respective major
+     * increase the heard part
      * 
-     * @param studentList
-     *            list of students
-     * @param hobby
-     *            major to calc percentage for
-     * @return percent
+     * @param major
+     *            represents the major of the student
+     * @param answer
+     *            answer to like or not
      */
-    private static int[] calcPercMajorLiked(
-        LinkedList<Student> studentList,
-        LinkedList<Song> songList,
-        String major) {
-        ArrayList<String> likedData = new ArrayList<String>();
-        // build arraylist of all responses in all math heard datas
-        for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getMajor().equals(major)) {
-                for (int j = 0; j < studentList.get(i).getLikedData()
-                    .size(); j++) {
-                    // add elements from each sports students heard data
-                    likedData.add(studentList.get(i).getLikedData().get(j));
-                }
-
+    private void heard(String major, String answer) {
+        if (compare(major, "Computer Science") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[0][1]++;
+            }
+            else if (compare(answer, "No") == 0){
+                heard[0][0]++;
             }
         }
-
-        int[] yesLikedData = new int[songList.size()];
-        int[] noLikedData = new int[songList.size()];
-
-        int j = 0;
-        // increment yes's in corresponding indices in yesHeardData
-        for (int i = 0; i < likedData.size(); i++) {
-            if (j % songList.size() == 0) {
-                j = 0;
+        else if (compare(major, "Other Engineering") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[1][1]++;
             }
-            if (likedData.get(i).equals("Yes")) {
-                yesLikedData[j]++;
-            }
-            else if (likedData.get(i).equals("No")) {
-                noLikedData[j]++;
-            }
-            j++;
-        }
-        int[] percArray = new int[songList.size()];
-        // Calculate percents and put in array
-        for (int i = 0; i < percArray.length; i++) {
-            int total = yesLikedData[i] + noLikedData[i];
-            if (total != 0) {
-                int percentHeard = (yesLikedData[i] * 100) / total;
-                percArray[i] = percentHeard;
+            else if (compare(answer, "No") == 0) {
+                heard[1][0]++;
             }
         }
-        LinkedList<Student> majorStudent = new LinkedList<Student>();
-        for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getHobby().equals("sports")) {
-                majorStudent.add(studentList.get(i));
+        else if (compare(major, "Math or CMDA") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[2][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                heard[2][0]++;
             }
         }
-        return percArray;
+        else if (compare(major, "Other") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                heard[3][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                heard[3][0]++;
+            }
+        }
     }
 
 
     /**
-     * iniitalize percentages in song object 
+     * Increase the like part.
      * 
-     * @param studentList
-     *            list of students
-     * @param songList
-     *            list of songs
+     * @param major
+     *            the student's major
+     * @param answer
+     *            answer to like or not
      */
-    public static void setPercentSongs(
-        LinkedList<Student> studentList,
-        LinkedList<Song> songList) {
-        // Calc percentages heard and liked for computer science
-        int[] csHP = calcPercMajorHeard(studentList, songList, "Computer Science");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setComputerScienceHeardPercent(csHP[i]);
+    private void like(String major, String answer) {
+        if (compare(major, "Computer Science") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[0][1]++;
+            }
+            else if (compare(answer, "No") == 0){
+                like[0][0]++;
+            }
         }
-
-        int[] csLP = calcPercMajorLiked(studentList, songList, "Computer Science");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setComputerScienceLikedPercent(csLP[i]);
+        else if (compare(major, "Other Engineering") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[1][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                like[1][0]++;
+            }
         }
-
-        // Calc percentages heard and liked for Other Engineering
-
-        int[] oeHP = calcPercMajorHeard(studentList, songList, "Other Engineering");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setOtherEngineeringHeardPercent(oeHP[i]);
+        else if (compare(major, "Math or CMDA") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[2][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                like[2][0]++;
+            }
         }
-
-        int[] oeLP = calcPercMajorLiked(studentList, songList, "Other Engineering");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setOtherEngineeringLikedPercent(oeLP[i]);
+        else if (compare(major, "Other") == 0) {
+            if (compare(answer, "Yes") == 0) {
+                like[3][1]++;
+            }
+            else if (compare(answer, "No") == 0) {
+                like[3][0]++;
+            }
         }
+    }
 
-        // Calc percentages heard and liked for Math or CMDA
-        int[] mHP = calcPercMajorHeard(studentList, songList, "Math or CMDA");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setMathOrCMDAHeardPercent(mHP[i]);
-        }
 
-        int[] mLP = calcPercMajorLiked(studentList, songList, "Math or CMDA");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setMathOrCMDALikedPercent(mLP[i]);
-        }
+    /**
+     * get the heard or not results in percentages
+     * 
+     * @return the heard or not results
+     */
+    public int[] getHeard() {
+        int[] result = new int[4];
+        result[0] = (int)((1.0 * heard[0][1] / (heard[0][0] + heard[0][1]))
+            * 100);
+        result[1] = (int)((1.0 * heard[1][1] / (heard[1][0] + heard[1][1]))
+            * 100);
+        result[2] = (int)((1.0 * heard[2][1] / (heard[2][0] + heard[2][1]))
+            * 100);
+        result[3] = (int)((1.0 * heard[3][1] / (heard[3][0] + heard[3][1]))
+            * 100);
+        return result;
+    }
 
-        // Calc percentages heard and liked for other
-        int[] oHP = calcPercMajorHeard(studentList, songList, "Other");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setOtherHeardPercent(oHP[i]);
-        }
 
-        int[] oLP = calcPercMajorLiked(studentList, songList, "Other");
-        for (int i = 0; i < songList.size(); i++) {
-            Song cur = songList.get(i);
-            cur.setOtherLikedPercent(oLP[i]);
-        }
+    /**
+     * get the like or not results
+     * 
+     * @return the like or not results
+     */
+    public int[] getLike() {
+        int[] result = new int[4];
+        result[0] = (int)((1.0 * like[0][1] / (like[0][0] + like[0][1])) * 100);
+        result[1] = (int)((1.0 * like[1][1] / (like[1][0] + like[1][1])) * 100);
+        result[2] = (int)((1.0 * like[2][1] / (like[2][0] + like[2][1])) * 100);
+        result[3] = (int)((1.0 * like[3][1] / (like[3][0] + like[3][1])) * 100);
+        return result;
+    }
+
+
+    /**
+     * Compare two strings together
+     * 
+     * @return 0 if equal, neg if major is less than answer, and pos if greater
+     */
+    @Override
+    public int compare(String major, String answer) {
+        return major.compareTo(answer);
     }
 }

@@ -1,310 +1,470 @@
-/**
- * package for project 5
- */
 package prj5;
 
 import java.awt.Color;
+
 import CS2114.Button;
-import CS2114.Shape;
 import CS2114.TextShape;
 import CS2114.Window;
 import CS2114.WindowSide;
 
 /**
- * Class to set up the window and place all the
- * graphical elements on the screen
+ * The Window to display the glyphs and have buttons
+ * for the user to display the data based on different
+ * specifications
+ * 
  * @author Collin Smith (smithcol)
  * @version 04.18.2017
  */
 public class DisplayWindow 
 {
     private Window window;
+    private SongList songList;
+    private SongGUI[] songPanels;
+    private LegendGUI[] legend;
+    private int panelHeight;
+    private int panelWidth;
     
-    //buttons for the user to interact with the program
-    private Button sortArtist;
-    private Button sortTitle;
-    private Button sortYear;
-    private Button sortGenre;
-    private Button next;
+    //fields for the buttons
     private Button prev;
+    private Button next;
+    private Button sortByArtistName;
+    private Button sortBySongTitle;
+    private Button sortByGenre;
+    private Button sortByDate;
     private Button hobby;
     private Button major;
     private Button region;
     private Button quit;
     
-    //fields for the legend graphics
-    private Shape legend;
-    private TextShape lheader;
-    private TextShape line1;
-    private TextShape line2;
-    private TextShape line3;
-    private TextShape line4;
-    private Shape lbar;
-    private TextShape lbartext;
-    
-    //fields for an example glyph until further
-    //functions have been implemented
-    private TextShape glyphheader;
-    private Shape centerbar;
-    private Shape bar1;
-    private Shape bar2;
-    private Shape bar3;
-    private Shape bar4;
+    //fields to switch between display slides
+    private int slides;
+    private int currentSlide;
+    private int legendType;
     
     /**
-     * Creates a new program window with user buttons
+     * Creates a new DisplayWindow to show the glyphs and
+     * has buttons for the user to switch the graphic
+     * representation
+     * 
+     * @param songList
+     *            is the song list to visualize
      */
-    public DisplayWindow()
+    public DisplayWindow(SongList sList) 
     {
         window = new Window("Project 5");
-        window.setSize(1350, 700);
+        songList = sList;
+        // store songs in one slide
+        songPanels = new SongGUI[9];
         
+        // define the size of one single song panel
+        panelHeight = window.getGraphPanelHeight() / 5;
+        panelWidth = window.getGraphPanelWidth() / 4;
+        
+        // slide number
+        currentSlide = 1;
+        slides = songList.size() % 9 == 0 ? songList.size() / 9
+                : (songList.size() / 9) + 1;
+        
+        // sets up the buttons
         setUpButtons();
         
+        // sets up the legend
         setUpLegend();
-        
-<<<<<<< HEAD
-        new Glyph(400, 400, window);
-        
-        //setUpExampleGlyph();
-=======
-        setUpExampleGlyph();
->>>>>>> origin/master
+        // welcome text
+        TextShape welcomeText = new TextShape(0, 0, "Click a sort button to get started");
+        welcomeText.setBackgroundColor(Color.WHITE);
+        welcomeText.setX(
+                (window.getGraphPanelWidth() - welcomeText.getWidth()) / 2);
+        welcomeText.setY(
+                (window.getGraphPanelHeight() - welcomeText.getHeight()) / 4);
+        window.addShape(welcomeText);
     }
-    
+
     /**
-     * helper method to create and place all the buttons
+     * helper method to get the song data for current page
+     * 
+     * @param currentPage - the current page number
      */
-    private void setUpButtons()
+    private void getSlide(int currSlide) 
     {
-        //button to move to the previous set of glyphs
-        prev = new Button("<-- Prev");
-        window.addButton(prev, WindowSide.NORTH);
+        for (int i = 0; i < songPanels.length; i++) 
+        {
+            songPanels[i] = null;
+        }
+        // get songs for current page
+        for (int i = (currSlide - 1) * 9, j = 0; i < songList.size()
+                && j < 9; i++, j++) 
+        {
+            songPanels[j] = new SongGUI(songList.getAt(i), getX(j),
+                    getY(j), panelWidth);
+        }
+    }
+
+    /**
+     * helper method to get the X coordinate of a panel
+     * 
+     * @param index -  is the 0~8 corresponding to the 
+     *                  9 songs in a page
+     * @return the x coordinate
+     */
+    private int getX(int index) 
+    {
+        if (index % 3 == 0) 
+        {
+            return 30;
+        }
+        else 
+        {
+            return (30 + panelWidth) * (index % 3) + 30;
+        }
+    }
+
+    /**
+     * helper method to get the Y coordinate of a panel
+     * 
+     * @param index - is the 0~8 corresponding to the 
+     *                 9 songs in a page
+     * @return the y coordinate
+     */
+    private int getY(int index) 
+    {
+        if (index / 3 == 0) {
+            return 20;
+        }
+        else 
+        {
+            return (20 + panelHeight) * (index / 3) + 20;
+        }
+    }
+
+    /**
+     * creates and adds all the buttons
+     */
+    private void setUpButtons() 
+    {
+        prev = new Button("Prev");
         prev.onClick(this, "clickedPrev");
-        
-        //button to sort the glyphs by artist
-        sortArtist = new Button("Sort by Artist");
-        window.addButton(sortArtist, WindowSide.NORTH);
-        sortArtist.onClick(this, "clickedSortArtist");
-        
-        //button to sort the glyphs by title
-        sortTitle = new Button("Sort by Title");
-        window.addButton(sortTitle, WindowSide.NORTH);
-        sortTitle.onClick(this, "clickedSortTitle");
-        
-        //button to sort the glyphs by year
-        sortYear = new Button("Sort by Year");
-        window.addButton(sortYear, WindowSide.NORTH);
-        sortYear.onClick(this, "clickedSortYear");
-        
-        //button to sort the glyphs by genre
-        sortGenre = new Button("Sort by Genre");
-        window.addButton(sortGenre, WindowSide.NORTH);
-        sortGenre.onClick(this, "clickedSortGenre");
-        
-        //button to show the next set of glyphs
-        next = new Button("Next -->");
-        window.addButton(next, WindowSide.NORTH);
+        prev.disable();
+
+        next = new Button("Next");
         next.onClick(this, "clickedNext");
-        
-        //button to show the glyphs based on hobbies
-        hobby = new Button("Hobby");
-        window.addButton(hobby, WindowSide.SOUTH);
-        hobby.onClick(this, "clickedNext");
-        
-        //button to show the glyphs based on major
-        major = new Button("Major");
-        window.addButton(major, WindowSide.SOUTH);
+        next.disable();
+
+        sortByArtistName = new Button("Sort by Artist Name");
+        sortByArtistName.onClick(this, "clickedSortByArtistName");
+
+        sortBySongTitle = new Button("Sort by Song Title");
+        sortBySongTitle.onClick(this, "clickedSortBySongTitle");
+
+        sortByGenre = new Button("Sort by Genre");
+        sortByGenre.onClick(this, "clickedSortByGenre");
+
+        sortByDate = new Button("Sort by Release Year");
+        sortByDate.onClick(this, "clickedSortByDate");
+
+        hobby = new Button("Represent Hobby");
+        hobby.onClick(this, "clickedHobby");
+
+        major = new Button("Represent Major");
         major.onClick(this, "clickedMajor");
-        
-        //button to show the glyphs based on region
-        region = new Button("Region");
-        window.addButton(region, WindowSide.SOUTH);
+
+        region = new Button("Represent Region");
         region.onClick(this, "clickedRegion");
-        
-        //button to quit out of the program
+
         quit = new Button("Quit");
-        window.addButton(quit, WindowSide.SOUTH);
         quit.onClick(this, "clickedQuit");
+        
+        // North side buttons
+        window.addButton(prev, WindowSide.NORTH);
+        window.addButton(sortByArtistName, WindowSide.NORTH);
+        window.addButton(sortBySongTitle, WindowSide.NORTH);
+        window.addButton(sortByDate, WindowSide.NORTH);
+        window.addButton(sortByGenre, WindowSide.NORTH);
+        window.addButton(next, WindowSide.NORTH);
+        
+        // South side buttons
+        window.addButton(hobby, WindowSide.SOUTH);
+        window.addButton(major, WindowSide.SOUTH);
+        window.addButton(region, WindowSide.SOUTH);
+        window.addButton(quit, WindowSide.SOUTH);
+
+        updateButtons(false);
     }
-    
+
     /**
-     * helper method to create and place all the legend graphic items
+     * helper method to change the status at bottom
+     * 
+     * @param flag
+     *            if it is true, then enable the bottom 
+     *            buttons, else, disable them
      */
-    private void setUpLegend()
+    private void updateButtons(boolean flag) 
     {
-        //creates the border for the legend
-        legend = new Shape(window.getGraphPanelWidth()-160, 
-                window.getGraphPanelHeight()-210, 150, 200);
-        legend.setForegroundColor(Color.BLACK);
-        legend.setBackgroundColor(Color.WHITE);
-        window.addShape(legend);
-        
-        //creates the legend header
-        lheader = new TextShape(window.getGraphPanelWidth() - 115, 
-                window.getGraphPanelHeight() - 190, "Legend", Color.BLACK);
-        window.addShape(lheader);
-        window.moveToFront(lheader);
-        lheader.setBackgroundColor(Color.WHITE);
-        
-        //creates the first line in the legend
-        line1 = new TextShape(window.getGraphPanelWidth() - 120, 
-                window.getGraphPanelHeight() - 160, "Area 1", Color.MAGENTA);
-        window.addShape(line1);
-        window.moveToFront(line1);
-        line1.setBackgroundColor(Color.WHITE);
-        
-        //creates the second line in the legend
-        line2 = new TextShape(window.getGraphPanelWidth() - 120, 
-                window.getGraphPanelHeight() - 140, "Area 2", Color.BLUE);
-        window.addShape(line2);
-        window.moveToFront(line2);
-        line2.setBackgroundColor(Color.WHITE);
-        
-        //creates the third line in the legend
-        line3 = new TextShape(window.getGraphPanelWidth() - 120, 
-                window.getGraphPanelHeight() - 120, "Area 3", Color.ORANGE);
-        window.addShape(line3);
-        window.moveToFront(line3);
-        line3.setBackgroundColor(Color.WHITE);
-        
-        //creates the fourth line in the legend
-        line4 = new TextShape(window.getGraphPanelWidth() - 120, 
-                window.getGraphPanelHeight() - 100, "Area 4", Color.GREEN);
-        window.addShape(line4);
-        window.moveToFront(line4);
-        line4.setBackgroundColor(Color.WHITE);
-        
-        //creates the bar to mimic the glyph bar
-        lbar = new Shape(window.getGraphPanelWidth() - 95,
-                window.getGraphPanelHeight() - 80, 8, 50);
-        window.addShape(lbar);
-        lbar.setBackgroundColor(Color.BLACK);
-        lbar.setForegroundColor(Color.WHITE);
-        
-        //creates the text on either side of the bar to signal which side
-        //represents what
-        lbartext = new TextShape(lbar.getX() - 50, lbar.getY() + 17,
-                "Heard      Likes", Color.BLACK);
-        window.addShape(lbartext);
-        window.moveToFront(lbartext);
-        window.moveToFront(lbar); //moves the bar in front of the text
-        lbartext.setBackgroundColor(Color.WHITE);
+        if (flag) 
+        {
+            hobby.enable();
+            major.enable();
+            region.enable();
+        }
+        else 
+        {
+            hobby.disable();
+            major.disable();
+            region.disable();
+        }
     }
-    
+
     /**
-     * sets up an example glyph
+     * Initialize the legend
      */
-    private void setUpExampleGlyph()
+    private void setUpLegend() 
     {
-        glyphheader = new TextShape(120, 80, "Example Glyph", Color.BLACK);
-        window.addShape(glyphheader);
-        glyphheader.setBackgroundColor(Color.WHITE);
-        
-        bar1 = new Shape(100, 100, 100, 20, Color.MAGENTA);
-        window.addShape(bar1);
-        
-        bar2 = new Shape(120, 120, 130, 20, Color.BLUE);
-        window.addShape(bar2);
-        
-        bar3 = new Shape(100, 140, 140, 20, Color.ORANGE);
-        window.addShape(bar3);
-        
-        bar4 = new Shape(110, 160, 160, 20, Color.GREEN);
-        window.addShape(bar4);
-        
-        centerbar = new Shape(170, 100, 10, 80, Color.BLACK);
-        window.addShape(centerbar);
-        window.moveToFront(centerbar);
+        int x = window.getGraphPanelWidth() * 5 / 6 - 2;
+        int y = window.getGraphPanelHeight() / 5;
+        legend = new LegendGUI[3];
+        legend[0] = new LegendGUI("Hobby", x, y,
+                window.getGraphPanelWidth(), window.getGraphPanelHeight());
+        legend[1] = new LegendGUI("Major", x, y,
+                window.getGraphPanelWidth(), window.getGraphPanelHeight());
+        legend[2] = new LegendGUI("Region", x, y,
+                window.getGraphPanelWidth(), window.getGraphPanelHeight());
     }
-    
+
     /**
-     * stub to update the graphics based on the artist
-     * @param button - the sortArtist button
+     * Update legend
+     * 
+     * @param currentLegend
+     *            Current legend
      */
-    public void clickedSortArtist(Button button)
+    private void updateLegend(int currentLegend) 
     {
-        
+        window.addShape(legend[currentLegend].getSeparator());
+        window.addShape(legend[currentLegend].getTitle());
+        window.addShape(legend[currentLegend].getSongTitle());
+        window.addShape(legend[currentLegend].getHeard());
+        window.addShape(legend[currentLegend].getLike());
+
+        for (int i = 0; i < 4; i++) {
+            window.addShape(legend[currentLegend].getText()[i]);
+        }
+
+        window.addShape(legend[currentLegend].getFrame());
     }
-    
+
     /**
-     * stub to update the graphics based on the title
-     * @param button - the sortTitle button
+     * Clicked prev button. If the current page is 1, the button will be set to
+     * disable.
+     * 
+     * @param prev
+     *            Button
      */
-    public void clickedSortTitle(Button button)
+    public void clickedPrev(Button prev) 
     {
-        
+        currentSlide--;
+        next.enable();
+        updateSlide();
     }
-    
+
     /**
-     * stub to update the graphics based on the year
-     * @param button - the sortYear button
+     * helper method to update the status of previous and next button
      */
-    public void clickedSortYear(Button button)
+    private void updatePrevAndNext() 
     {
-        
+        if (currentSlide < slides) 
+        {
+            next.enable();
+        }
+        if (currentSlide == 1) 
+        {
+            prev.disable();
+        }
+        if (currentSlide == slides) 
+        {
+            next.disable();
+        }
+        if (slides == 1) 
+        {
+            prev.disable();
+            next.disable();
+        }
     }
-    
+
     /**
-     * stub to update the graphics based on the genre
-     * @param button - the sortGenre button
+     * Clicked next button. If the current page is the last page, the button
+     * will be set to disable.
+     * 
+     * @param next
+     *            Button
      */
-    public void clickedSortGenre(Button button)
+    public void clickedNext(Button next) 
     {
-        
+        currentSlide++;
+        prev.enable();
+        updateSlide();
     }
-    
+
     /**
-     * stub to display the next set of glyphs
-     * @param button - the next button
+     * Clicked sort by song title
+     * 
+     * @param sortByTitle
+     *            Button
      */
-    public void clickedNext(Button button)
+    public void clickedSortBySongTitle(Button sortByTitle) 
     {
-        
+        window.removeAllShapes();
+        songList.insertionSort("sortByTitle");
+        next.disable();
+        prev.disable();
+        updateSlide();
+        updateButtons(true);
     }
-    
+
     /**
-     * stub to display the previous set of glyphs
-     * @param button - the prev button
+     * Clicked sort by artist name
+     * 
+     * @param sortByArtist
+     *            Button
      */
-    public void clickedPrev(Button button)
+    public void clickedSortByArtistName(Button sortByArtist) 
     {
-        
+        window.removeAllShapes();
+        songList.insertionSort("sortByArtist");
+        next.disable();
+        prev.disable();
+        updateSlide();
+        updateButtons(true);
     }
-    
+
     /**
-     * stub to update the graphics based on hobbies
-     * @param button - the hobby button
+     * Clicked sort by genre
+     * 
+     * @param sortByGenre
+     *            Button
      */
-    public void clickedHobby(Button button)
+    public void clickedSortByGenre(Button sortByGenre) 
     {
-        
+        window.removeAllShapes();
+        songList.insertionSort("sortByGenre");
+        next.disable();
+        prev.disable();
+        updateSlide();
+        updateButtons(true);
     }
-    
+
     /**
-     * stub to update the graphics based on majors
-     * @param button - the major button
+     * Clicked sort by date
+     * 
+     * @param sortByDate
+     *            Button
      */
-    public void clickedMajor(Button button)
+    public void clickedSortByDate(Button sortByDate) 
     {
-        
+        window.removeAllShapes();
+        songList.insertionSort("sortByDate");
+        updateSlide();
+        updateButtons(true);
     }
-    
+
     /**
-     * stub to update the graphics based on student region
-     * @param button - the region button
+     * Represent hobby
+     * 
+     * @param hobby
+     *            Button
      */
-    public void clickedRegion(Button button)
+    public void clickedHobby(Button hobby) 
     {
-        
+        legendType = 0;
+        currentSlide = 1;
+        updateSlide();
+
     }
-    
+
     /**
-     * quits the current program when the quit button is clicked
-     * @param button - the quit button passed
+     * Represent major
+     * 
+     * @param major
+     *            Button
      */
-    public void clickedQuit(Button button)
+    public void clickedMajor(Button major) 
+    {
+        legendType = 1;
+        currentSlide = 1;
+        updateSlide();
+    }
+
+    /**
+     * Represent region
+     * 
+     * @param region
+     *            Button
+     */
+    public void clickedRegion(Button region) 
+    {
+        legendType = 2;
+        currentSlide = 1;
+        updateSlide();
+    }
+
+    /**
+     * Exits out of the program
+     * 
+     * @param quit
+     *            Button
+     */
+    public void clickedQuit(Button quit) 
     {
         System.exit(0);
+    }
+
+    /**
+     * Clear the window and repaint
+     */
+    private void updateSlide() 
+    {
+        window.removeAllShapes();
+        updateSongPanels();
+        updateLegend(legendType);
+        updatePrevAndNext();
+    }
+
+    /**
+     * update song panels
+     */
+    private void updateSongPanels() 
+    {
+        getSlide(currentSlide);
+        for (int i = 0; i < 9; i++) 
+        {
+            if (songPanels[i] != null) 
+            {
+                window.addShape(songPanels[i].songTitle());
+                window.addShape(songPanels[i].artistName());
+                if (legendType == 0) {
+                    for (int j = 0; j < 8; j++) 
+                    {
+                        window.addShape(
+                                songPanels[i].hobbyPanel().getBar()[j]);
+                    }
+                }
+                else if (legendType == 1) 
+                {
+                    for (int j = 0; j < 8; j++) 
+                    {
+                        window.addShape(
+                                songPanels[i].majorPanel().getBar()[j]);
+                    }
+                }
+                else 
+                {
+                    for (int j = 0; j < 8; j++) 
+                    {
+                        window.addShape(
+                                songPanels[i].regionPanel().getBar()[j]);
+                    }
+                }
+                window.addShape(songPanels[i].hobbyPanel().getSeparator());
+            }
+        }
+
     }
 }

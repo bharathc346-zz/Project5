@@ -1,658 +1,149 @@
-/**
- * 
- */
 package prj5;
 
 /**
- * @author bharathchintagunta
-<<<<<<< HEAD
- * @version 2017-04-20
+ * This class represent a song in the survey. It has title, artist name, data,
+ * and genre. It also has hobbyCount, majorCount and regionCount, which were
+ * filled while reading files.
+ * 
+ * @author Group 48
+ * @version 04.20.2017
+ *
  */
 public class Song {
-
-=======
- * @verison 04.19.17
- */
-public class Song {
->>>>>>> origin/master
-    private String name;
-    private String artist;
-    private int year;
+    // ~ Fields
+    private String songTitle;
+    private String artistName;
+    private String date;
     private String genre;
-<<<<<<< HEAD
+    private HobbyPercent hobbyPerc;
+    private MajorPercent majorPerc;
+    private RegionPercent regionPerc;
 
-    private int sportsHeardPercent;
-    private int sportsLikedPercent;
-    private int readingHeardPercent;
-    private int readingLikedPercent;
-    private int artHeardPercent;
-    private int artLikedPercent;
-    private int musicHeardPercent;
-    private int musicLikedPercent;
-
-    private int computerScienceHeardPercent;
-    private int computerScienceLikedPercent;
-    private int otherEngineeringHeardPercent;
-    private int otherEngineeringLikedPercent;
-    private int mathOrCMDAHeardPercent;
-    private int mathOrCMDALikedPercent;
-    private int otherHeardPercent;
-    private int otherLikedPercent;
-
-    private int seHeardPercent;
-    private int seLikedPercent;
-    private int neHeardPercent;
-    private int neLikedPercent;
-    private int inlHeardPercent;
-    private int inlLikedPercent;
-    private int usHeardPercent;
-    private int usLikedPercent;
-
-
+    // ~ Constructor
     /**
-     * Song Constructor
+     * Creates a new song with the artist title, the song name,
+     * the song year, and the genre or "type"
      * 
-     * @param n
-     *            name
-     * @param a
-     *            artist
-     * @param y
-     *            year
-     * @param g
-     *            genre
-=======
-    
-    /**
-     * Song Constructor
-     * @param n name
-     * @param a artist
-     * @param y year
-     * @param g genre
->>>>>>> origin/master
+     * @param songTitle
+     *            is the tile of the song
+     * @param artistName
+     *            is the song's artist name
+     * @param date
+     *            is the date when that song was released
+     * @param genre
+     *            is the genre of the song
      */
-    public Song(String n, String a, int y, String g) {
-        this.name = n;
-        this.artist = a;
-        this.year = y;
-        this.genre = g;
+    public Song(String title, String name, String year, String type) 
+    {
+        songTitle = title;
+        artistName = name;
+        date = year;
+        genre = type;
+        hobbyPerc = new HobbyPercent();
+        majorPerc = new MajorPercent();
+        regionPerc = new RegionPercent();
     }
-<<<<<<< HEAD
-
 
     /**
-     * getName of song
+     * get the artist name of the song
      * 
-=======
-    
-    /**
-     * getName of song
->>>>>>> origin/master
-     * @return song name
+     * @return the artist name
      */
-    public String getName() {
-        return this.name;
+    public String getArtistName() 
+    {
+        return artistName;
     }
-<<<<<<< HEAD
-
 
     /**
-     * get Artist
+     * get the song title
      * 
-     * @return artist
+     * @return the song title
      */
-    public String getArtist() {
-        return this.artist;
+    public String getSongTitle() 
+    {
+        return songTitle;
     }
 
-
     /**
-     * get year
+     * get the genre
      * 
-=======
-    
-    /**
-     * get Artist
-     * @return artist
+     * @return the genre
      */
-    public String getArtist() {
-        return this.artist;       
+    public String getGenre() 
+    {
+        return genre;
     }
-    
-    /**
-     * get year
->>>>>>> origin/master
-     * @return year
-     */
-    public int getYear() {
-        return this.year;
-    }
-<<<<<<< HEAD
-
 
     /**
-     * get genre
+     * get the release date
      * 
-=======
-    
-    /**
-     * get genre
->>>>>>> origin/master
-     * @return genre
+     * @return the release date
      */
-    public String getGenre() {
-        return this.genre;
+    public String getDate() 
+    {
+        return date;
     }
-<<<<<<< HEAD
-
 
     /**
-     * set sports students heard percent
+     * Increment the hobbyCount, majorCount and regionCount. This method is
+     * called when the reader read a pair of answers from a student about a
+     * song.
      * 
-     * @param p
-     *            percent to set to
+     * @param hobby
+     *            is the hobby the student has
+     * @param major
+     *            is the major the student has
+     * @param region
+     *            is the region the student from
+     * @param answerHeard
+     *            is whether the student has heard this song or not
+     * @param answerLike
+     *            is whether the student likes this song or not
      */
-    public void setSportsHeardPercent(int p) {
-        this.sportsHeardPercent = p;
+    public void increment(String hobby, String major, String region,
+            String answerHeard, String answerLike) {
+        this.hobbyPerc.increment(hobby, answerHeard, answerLike);
+        this.majorPerc.increment(major, answerHeard, answerLike);
+        this.regionPerc.increment(region, answerHeard, answerLike);
     }
-
 
     /**
-     * set sports students liked percent
+     * getHobbyPercent()
      * 
-     * @param p
-     *            percent to set to
+     * @return the results count by hobby of this song
      */
-    public void setSportsLikedPercent(int p) {
-        this.sportsLikedPercent = p;
+    public HobbyPercent getHobbyPercent() {
+        return this.hobbyPerc;
     }
-
 
     /**
-     * get sports students heard percent
+     * getMajorPercent()
      * 
-     * @return sports heard percent
+     * @return the results count by major of this song
      */
-    public int getSportsHeardPercent() {
-        return this.sportsHeardPercent;
+    public MajorPercent getMajorPercent() {
+        return this.majorPerc;
     }
-
 
     /**
-     * get sports students liked percent
+     * getRegionPercent()
      * 
-     * @return sports heard percent
+     * @return the results count by region of this song
      */
-    public int getSportsLikedPercent() {
-        return this.sportsLikedPercent;
+    public RegionPercent getRegionPercent() {
+        return this.regionPerc;
     }
-
 
     /**
-     * set music students heard percent
+     * returns the song's representation as a string
      * 
-     * @param p
-     *            percent to set to
+     * @return the song's information in String
      */
-    public void setMusicHeardPercent(int p) {
-        this.musicHeardPercent = p;
+    @Override
+    public String toString() 
+    {
+        return "Song Title: " + this.songTitle + "\nSong Artist: "
+                + this.artistName + "\nSong Genre: " + this.genre
+                + "\nSong Year: " + this.date + "\n";
     }
-
-
-    /**
-     * set music students liked percent
-     * 
-     * @param p
-     *            percent to set to
-     */
-    public void setMusicLikedPercent(int p) {
-        this.musicLikedPercent = p;
-    }
-
-
-    /**
-     * get music students heard percent
-     * 
-     * @return music heard percent
-     */
-    public int getMusicHeardPercent() {
-        return this.musicHeardPercent;
-    }
-
-
-    /**
-     * get music students liked percent
-     * 
-     * @return music heard percent
-     */
-    public int getMusicLikedPercent() {
-        return this.musicLikedPercent;
-    }
-
-
-    /**
-     * set reading students heard percent
-     * 
-     * @param p
-     *            percent to set to
-     */
-    public void setReadingHeardPercent(int p) {
-        this.readingHeardPercent = p;
-    }
-
-
-    /**
-     * set reading students liked percent
-     * 
-     * @param p
-     *            percent to set to
-     */
-    public void setReadingLikedPercent(int p) {
-        this.readingLikedPercent = p;
-    }
-
-
-    /**
-     * get reading students heard percent
-     * 
-     * @return reading heard percent
-     */
-    public int getReadingHeardPercent() {
-        return this.readingHeardPercent;
-    }
-
-
-    /**
-     * get reading students liked percent
-     * 
-     * @return reading heard percent
-     */
-    public int getReadingLikedPercent() {
-        return this.readingLikedPercent;
-    }
-
-
-    /**
-     * set art students heard percent
-     * 
-     * @param p
-     *            percent to set to
-     */
-    public void setArtHeardPercent(int p) {
-        this.artHeardPercent = p;
-    }
-
-
-    /**
-     * set art students liked percent
-     * 
-     * @param p
-     *            percent to set to
-     */
-    public void setArtLikedPercent(int p) {
-        this.artLikedPercent = p;
-    }
-
-
-    /**
-     * get art students heard percent
-     * 
-     * @return art heard percent
-     */
-    public int getArtHeardPercent() {
-        return this.artHeardPercent;
-    }
-
-
-    /**
-     * get arts students liked percent
-     * 
-     * @return art heard percent
-     */
-    public int getArtLikedPercent() {
-        return this.artLikedPercent;
-    }
-
-
-    /**
-     * get cs heard percent
-     * 
-     * @return computer science heard percent
-     */
-    public int getComputerScienceHeardPercent() {
-        return computerScienceHeardPercent;
-    }
-
-
-    /**
-     * set cs heardpercent
-     * 
-     * @param computerScienceHeardPercent
-     *            csheardpercent
-     */
-    public void setComputerScienceHeardPercent(
-        int computerScienceHeardPercent) {
-        this.computerScienceHeardPercent = computerScienceHeardPercent;
-    }
-
-
-    /**
-     * get percent who liked cs
-     * 
-     * @return percent liked cs
-     */
-    public int getComputerScienceLikedPercent() {
-        return computerScienceLikedPercent;
-    }
-
-
-    /**
-     * set cs liked percent
-     * 
-     * @param computerScienceLikedPercent
-     *            percent
-     */
-    public void setComputerScienceLikedPercent(
-        int computerScienceLikedPercent) {
-        this.computerScienceLikedPercent = computerScienceLikedPercent;
-    }
-
-
-    /**
-     * get other eng heard percent
-     * 
-     * @return other eng heard percent
-     */
-    public int getOtherEngineeringHeardPercent() {
-        return otherEngineeringHeardPercent;
-    }
-
-
-    /**
-     * set other engineering heardpercent
-     * 
-     * @param other
-     *            eng HeardPercent percents
-     */
-    public void setOtherEngineeringHeardPercent(
-        int otherEngineeringHeardPercent) {
-        this.otherEngineeringHeardPercent = otherEngineeringHeardPercent;
-    }
-
-
-    /**
-     * get percent who liked other engineering
-     * 
-     * @return percent liked other eng
-     */
-    public int getOtherEngineeringLikedPercent() {
-        return otherEngineeringLikedPercent;
-    }
-
-
-    /**
-     * set other engineering liked percent
-     * 
-     * @param otherengineeringLikedPercent
-     *            percent
-     */
-    public void setOtherEngineeringLikedPercent(
-        int otherEngineeringLikedPercent) {
-        this.otherEngineeringLikedPercent = otherEngineeringLikedPercent;
-    }
-
-
-    /**
-     * get math heard percent
-     * 
-     * @return percent
-     */
-    public int getMathOrCMDAHeardPercent() {
-        return mathOrCMDAHeardPercent;
-    }
-
-
-    /**
-     * set math percent heard
-     * 
-     * @param mathOrCMDAHeardPercent
-     *            percent
-     */
-    public void setMathOrCMDAHeardPercent(int mathOrCMDAHeardPercent) {
-        this.mathOrCMDAHeardPercent = mathOrCMDAHeardPercent;
-    }
-
-
-    /**
-     * get math percent liked
-     * 
-     * @return math percent liked
-     */
-    public int getMathOrCMDALikedPercent() {
-        return mathOrCMDALikedPercent;
-    }
-
-
-    /**
-     * set math liked perdcent
-     * 
-     * @param mathOrCMDALikedPercent
-     *            percent
-     */
-    public void setMathOrCMDALikedPercent(int mathOrCMDALikedPercent) {
-        this.mathOrCMDALikedPercent = mathOrCMDALikedPercent;
-    }
-
-
-    /**
-     * get other heard percent
-     * 
-     * @return percent
-     */
-    public int getOtherHeardPercent() {
-        return otherHeardPercent;
-    }
-
-
-    /**
-     * set Other heard percent
-     * 
-     * @param otherHeardPercent
-     *            heard percent
-     */
-    public void setOtherHeardPercent(int otherHeardPercent) {
-        this.otherHeardPercent = otherHeardPercent;
-    }
-
-
-    /**
-     * get other liked percent
-     * 
-     * @return percent
-     */
-    public int getOtherLikedPercent() {
-        return otherLikedPercent;
-    }
-
-
-    /**
-     * set other liked percent
-     * 
-     * @param otherLikedPercent
-     *            percent
-     */
-    public void setOtherLikedPercent(int otherLikedPercent) {
-        this.otherLikedPercent = otherLikedPercent;
-    }
-
-
-    /**
-     * SE percent heard
-     * 
-     * @return percent
-     */
-    public int getSeHeardPercent() {
-        return seHeardPercent;
-    }
-
-
-    /**
-     * set SE percent heard
-     * 
-     * @param seHeardPercent
-     *            percent
-     */
-    public void setSeHeardPercent(int seHeardPercent) {
-        this.seHeardPercent = seHeardPercent;
-    }
-
-
-    /**
-     * get SE likedPercent
-     * 
-     * @return percent
-     */
-    public int getSeLikedPercent() {
-        return seLikedPercent;
-    }
-
-
-    /**
-     * get percent liked
-     * 
-     * @param seLikedPercent
-     *            p
-     */
-    public void setSeLikedPercent(int seLikedPercent) {
-        this.seLikedPercent = seLikedPercent;
-    }
-
-
-    /**
-     * get percent heard
-     * 
-     * @return p
-     */
-    public int getNeHeardPercent() {
-        return neHeardPercent;
-    }
-
-
-    /**
-     * set percent heard
-     * 
-     * @param neHeardPercent
-     *            p
-     */
-    public void setNeHeardPercent(int neHeardPercent) {
-        this.neHeardPercent = neHeardPercent;
-    }
-
-
-    /**
-     * get percent liked
-     * 
-     * @return p
-     */
-    public int getNeLikedPercent() {
-        return neLikedPercent;
-    }
-
-
-    /**
-     * set percent liked
-     * 
-     * @param neLikedPercent
-     *            p
-     */
-    public void setNeLikedPercent(int neLikedPercent) {
-        this.neLikedPercent = neLikedPercent;
-    }
-
-
-    /**
-     * get percent heard
-     * 
-     * @return p
-     */
-    public int getInlHeardPercent() {
-        return inlHeardPercent;
-    }
-
-
-    /**
-     * set percent heard
-     * 
-     * @param inlHeardPercent
-     *            p
-     */
-    public void setInlHeardPercent(int inlHeardPercent) {
-        this.inlHeardPercent = inlHeardPercent;
-    }
-
-
-    /**
-     * get percent liked
-     * 
-     * @return p
-     */
-    public int getInlLikedPercent() {
-        return inlLikedPercent;
-    }
-
-
-    /**
-     * set percent liked
-     * 
-     * @param inlLikedPercent
-     *            p
-     */
-    public void setInlLikedPercent(int inlLikedPercent) {
-        this.inlLikedPercent = inlLikedPercent;
-    }
-
-
-    /**
-     * get percent heard
-     * 
-     * @return p
-     */
-    public int getUsHeardPercent() {
-        return usHeardPercent;
-    }
-
-
-    /**
-     * set percent heard
-     * 
-     * @param usHeardPercent
-     *            p
-     */
-    public void setUsHeardPercent(int usHeardPercent) {
-        this.usHeardPercent = usHeardPercent;
-    }
-
-
-    /**
-     * get percent liked
-     * 
-     * @return p
-     */
-    public int getUsLikedPercent() {
-        return usLikedPercent;
-    }
-
-
-    /**
-     * set percent liked
-     * 
-     * @param usLikedPercent
-     *            p
-     */
-    public void setUsLikedPercent(int usLikedPercent) {
-        this.usLikedPercent = usLikedPercent;
-    }
-=======
-    
-    
->>>>>>> origin/master
 }
