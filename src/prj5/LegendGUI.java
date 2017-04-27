@@ -171,14 +171,14 @@ public class LegendGUI
                 text[1].setBackgroundColor(Color.WHITE);
                 y += text[0].getHeight() + 5;
 
-                text[2] = new TextShape(x, y, "US(other)");
+                text[2] = new TextShape(x, y, "Rest of US");
                 text[2].setX(x);
                 text[2].setY(y);
                 text[2].setForegroundColor(Color.ORANGE);
                 text[2].setBackgroundColor(Color.WHITE);
                 y += text[0].getHeight() + 5;
 
-                text[3] = new TextShape(x, y, "non-US");
+                text[3] = new TextShape(x, y, "Outside US");
                 text[3].setX(x);
                 text[3].setY(y);
                 text[3].setForegroundColor(Color.GREEN);

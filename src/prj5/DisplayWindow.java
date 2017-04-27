@@ -70,13 +70,14 @@ public class DisplayWindow
         
         // sets up the legend
         setUpLegend();
+        
         // welcome text
         TextShape welcomeText = new TextShape(0, 0, "Click a sort button to get started");
         welcomeText.setBackgroundColor(Color.WHITE);
         welcomeText.setX(
                 (window.getGraphPanelWidth() - welcomeText.getWidth()) / 2);
         welcomeText.setY(
-                (window.getGraphPanelHeight() - welcomeText.getHeight()) / 4);
+                (window.getGraphPanelHeight() - welcomeText.getHeight()) / 2);
         window.addShape(welcomeText);
     }
 
