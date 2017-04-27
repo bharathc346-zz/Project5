@@ -40,10 +40,26 @@ public class HobbyPercentTest extends TestCase {
         hobby.increment("music", "Yes", "No");
         hobby.increment("music", "No", "Yes");
         hobby.increment("music", "No", "No");
+        
+        hobby.increment("Apple", "", "no");
+        hobby.increment("zebra", "Yeah", "Naw");
+        hobby.increment("reading", "Hmm", "Hmm");
+        hobby.increment("art", "Hmm", "Hmm");
+        hobby.increment("sports", "Hmm", "Hmm");
+        hobby.increment("music", "Hmm", "Hmm");
+        hobby.increment("reading", "Zee", "Zee");
+        hobby.increment("art", "Zee", "Zee");
+        hobby.increment("sports", "Zee", "Zee");
+        hobby.increment("music", "Zee", "Zee");
 
         assertEquals(hobby.getHeard()[0], 50);
         assertEquals(hobby.getHeard()[1], 50);
         assertEquals(hobby.getHeard()[2], 50);
         assertEquals(hobby.getHeard()[3], 50);
+        assertEquals(hobby.getLike()[0], 50);
+        assertEquals(hobby.getLike()[1], 50);
+        assertEquals(hobby.getLike()[2], 50);
+        assertEquals(hobby.getLike()[3], 50);
+
     }
 }

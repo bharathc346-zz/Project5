@@ -45,10 +45,27 @@ public class RegionPercentTest extends TestCase {
         region.increment("Outside of United States", "Yes", "No");
         region.increment("Outside of United States", "No", "Yes");
         region.increment("Outside of United States", "No", "No");
+        
+        region.increment("Apple", "", "no");
+        region.increment("zebra", "Yeah", "Naw");
+        region.increment("Northeast", "Hmm", "Hmm");
+        region.increment("Southeast", "Hmm", "Hmm");
+        region.increment("United States "
+            + "(other than Southeast or Northwest)", "Hmm", "Hmm");
+        region.increment("Outside of United States", "Hmm", "Hmm");
+        region.increment("Northeast", "Zee", "Zee");
+        region.increment("Southeast", "Zee", "Zee");
+        region.increment("United States "
+            + "(other than Southeast or Northwest)", "Zee", "Zee");
+        region.increment("Outside of United State", "Zee", "Zee");
 
         assertEquals(region.getHeard()[0], 50);
         assertEquals(region.getHeard()[1], 50);
         assertEquals(region.getHeard()[2], 50);
         assertEquals(region.getHeard()[3], 50);
+        assertEquals(region.getLike()[0], 50);
+        assertEquals(region.getLike()[1], 50);
+        assertEquals(region.getLike()[2], 50);
+        assertEquals(region.getLike()[3], 50);
     }
 }

@@ -41,10 +41,25 @@ public class MajorPercentTest extends TestCase {
         major.increment("Other", "Yes", "No");
         major.increment("Other", "No", "Yes");
         major.increment("Other", "No", "No");
+        
+        major.increment("Apple", "", "no");
+        major.increment("zebra", "Yeah", "Naw");
+        major.increment("Computer Science", "Hmm", "Hmm");
+        major.increment("Other Engineering", "Hmm", "Hmm");
+        major.increment("Math or CMDA", "Hmm", "Hmm");
+        major.increment("Other", "Hmm", "Hmm");
+        major.increment("Computer Science", "Zee", "Zee");
+        major.increment("Other Engineering", "Zee", "Zee");
+        major.increment("Math or CMDA", "Zee", "Zee");
+        major.increment("Other", "Zee", "Zee");
 
         assertEquals(major.getHeard()[0], 50);
         assertEquals(major.getHeard()[1], 50);
         assertEquals(major.getHeard()[2], 50);
         assertEquals(major.getHeard()[3], 50);
+        assertEquals(major.getLike()[0], 50);
+        assertEquals(major.getLike()[1], 50);
+        assertEquals(major.getLike()[2], 50);
+        assertEquals(major.getLike()[3], 50);
     }
 }
