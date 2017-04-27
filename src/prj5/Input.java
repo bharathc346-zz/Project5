@@ -30,7 +30,7 @@ public class Input
         this.songList = new SongList();
         readSongFile(songs);
         readStudentFile(students);
-        new DisplayWindow(this.songList);
+        new GUIDisplayWindow(this.songList);
     }
 
     /**

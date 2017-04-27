@@ -12,7 +12,7 @@ import CS2114.TextShape;
  * @author Collin Smith (smithcol)
  * @version 04.26.2017
  */
-public class LegendGUI 
+public class GUILegend 
 {
     //fields for the legend
     private Shape frame;
@@ -38,7 +38,7 @@ public class LegendGUI
      * @param width - the width of the given window
      * @param height - the height of the given window
      */
-    public LegendGUI(String type, int startX, int startY, int width,
+    public GUILegend(String type, int startX, int startY, int width,
             int height) 
     {
         xCoord = startX;
@@ -85,7 +85,8 @@ public class LegendGUI
     private void addText(String type) 
     {
         text = new TextShape[4];
-        int x, y;
+        int x = 0;
+        int y = 0;
 
         switch (type) 
         {

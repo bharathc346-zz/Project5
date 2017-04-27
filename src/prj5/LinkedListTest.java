@@ -62,7 +62,7 @@ public class LinkedListTest extends TestCase {
         {
             lList.getAt(1);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             thrown = e;
         }

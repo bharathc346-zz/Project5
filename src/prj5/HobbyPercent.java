@@ -7,7 +7,7 @@ import java.util.Comparator;
  * @version 4/27/2017
  *
  */
-public class HobbyPercent implements Comparator<String>{
+public class HobbyPercent implements Comparator<String> {
     // ~ Fields
     private int[][] like;
     private int[][] heard;

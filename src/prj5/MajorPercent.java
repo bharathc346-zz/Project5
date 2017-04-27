@@ -55,7 +55,7 @@ public class MajorPercent implements Comparator<String> {
             if (compare(answer, "Yes") == 0) {
                 heard[0][1]++;
             }
-            else if (compare(answer, "No") == 0){
+            else if (compare(answer, "No") == 0) {
                 heard[0][0]++;
             }
         }
@@ -99,7 +99,7 @@ public class MajorPercent implements Comparator<String> {
             if (compare(answer, "Yes") == 0) {
                 like[0][1]++;
             }
-            else if (compare(answer, "No") == 0){
+            else if (compare(answer, "No") == 0) {
                 like[0][0]++;
             }
         }

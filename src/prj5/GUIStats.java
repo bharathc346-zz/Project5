@@ -11,7 +11,7 @@ import CS2114.Shape;
  * @author Collin Smith (smithcol)
  * @version 04.26.2017
  */
-public class StatsGUI 
+public class GUIStats 
 {
     // ~ Fields
     // Shape
@@ -27,13 +27,13 @@ public class StatsGUI
     // Size of panel
     private int panelWidth;
     // Height of bar
-    public final int BAR_HEIGHT = 10;
+    private final int BAR_HEIGHT = 10;
 
     // ~ Constructor
     /**
      * creates a new StatsGUI
      * 
-     * @param song
+     * @param tune
      *            Song
      * @param rep
      *            Type of represent
@@ -41,10 +41,10 @@ public class StatsGUI
      *            start X
      * @param startY
      *            start Y
-     * @param panelWidth
+     * @param width
      *            width of panel
      */
-    public StatsGUI(Song tune, String rep, int startX, int startY, int width) 
+    public GUIStats(Song tune, String rep, int startX, int startY, int width) 
     {
         song = tune;
         type = rep;

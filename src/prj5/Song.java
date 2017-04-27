@@ -24,13 +24,13 @@ public class Song {
      * Creates a new song with the artist title, the song name,
      * the song year, and the genre or "type"
      * 
-     * @param songTitle
+     * @param title
      *            is the tile of the song
-     * @param artistName
+     * @param name
      *            is the song's artist name
-     * @param date
+     * @param year
      *            is the date when that song was released
-     * @param genre
+     * @param type
      *            is the genre of the song
      */
     public Song(String title, String name, String year, String type) 

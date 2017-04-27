@@ -12,14 +12,14 @@ import CS2114.TextShape;
  * @version 04.26.2017
  *
  */
-public class SongGUI 
+public class GUISong 
 {
     // ~ Fields
     private TextShape songTitle;
     private TextShape artistName;
-    private StatsGUI hobbyPanel;
-    private StatsGUI majorPanel;
-    private StatsGUI regionPanel;
+    private GUIStats hobbyPanel;
+    private GUIStats majorPanel;
+    private GUIStats regionPanel;
     private int panelWidth;
     private int xCoord;
     private int yCoord;
@@ -33,19 +33,19 @@ public class SongGUI
      * @param startY - the start Y coordinate
      * @param width - the panel width
      */
-    public SongGUI(Song song, int startX, int startY, int width) 
+    public GUISong(Song song, int startX, int startY, int width) 
     {
         xCoord = startX;
         this.yCoord = startY;
         this.panelWidth = width;
         // deal with long length titles
-        String songTitle = song.getSongTitle();
-        int titleLength = songTitle.length();
+        String title = song.getSongTitle();
+        int titleLength = title.length();
         if (titleLength > 25) {
             int firstTwoWordEnd = 0;
             for (int i = 0, count = 0; i < titleLength && count < 2; i++) 
             {
-                if (songTitle.charAt(i) == ' ') 
+                if (title.charAt(i) == ' ') 
                 {
                     count++;
                 }
@@ -54,27 +54,27 @@ public class SongGUI
             int lastTwoWordsStart = 0;
             for (int i = 0, count = 0; i < titleLength && count < 2; i++) 
             {
-                if (songTitle.charAt(titleLength - 1 - i) == ' ') 
+                if (title.charAt(titleLength - 1 - i) == ' ') 
                 {
                     count++;
                 }
                 lastTwoWordsStart = titleLength - i;
             }            
-            String result = songTitle.substring(0, firstTwoWordEnd);
+            String result = title.substring(0, firstTwoWordEnd);
             result += " ... ";
-            result += songTitle.substring(lastTwoWordsStart, titleLength);
-            songTitle = result;
+            result += title.substring(lastTwoWordsStart, titleLength);
+            title = result;
         }
-        this.songTitle = new TextShape(0, 0, songTitle);
-        this.artistName = new TextShape(0, 0, "by " + song.getArtistName());
-        this.hobbyPanel = new StatsGUI(song, "hobby", startX, startY
-                + this.songTitle.getHeight() + this.artistName.getHeight() + 2,
+        songTitle = new TextShape(0, 0, title);
+        artistName = new TextShape(0, 0, "by " + song.getArtistName());
+        hobbyPanel = new GUIStats(song, "hobby", startX, startY
+                + songTitle.getHeight() + artistName.getHeight() + 2,
                 panelWidth);
-        this.majorPanel = new StatsGUI(song, "major", startX, startY
-                + this.songTitle.getHeight() + this.artistName.getHeight() + 2,
+        majorPanel = new GUIStats(song, "major", startX, startY
+                + songTitle.getHeight() + artistName.getHeight() + 2,
                 panelWidth);
-        this.regionPanel = new StatsGUI(song, "region", startX, startY
-                + this.songTitle.getHeight() + this.artistName.getHeight() + 2,
+        regionPanel = new GUIStats(song, "region", startX, startY
+                + songTitle.getHeight() + artistName.getHeight() + 2,
                 panelWidth);
         initTextShape();
     }
@@ -120,7 +120,7 @@ public class SongGUI
      * 
      * @return the statistic of hobby panel
      */
-    public StatsGUI hobbyPanel() 
+    public GUIStats hobbyPanel() 
     {
         return this.hobbyPanel;
     }
@@ -130,7 +130,7 @@ public class SongGUI
      * 
      * @return the statistic of major panel
      */
-    public StatsGUI majorPanel() 
+    public GUIStats majorPanel() 
     {
         return this.majorPanel;
     }
@@ -140,7 +140,7 @@ public class SongGUI
      * 
      * @return the statistic of region panel
      */
-    public StatsGUI regionPanel() 
+    public GUIStats regionPanel() 
     {
         return this.regionPanel;
     }

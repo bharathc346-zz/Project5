@@ -15,26 +15,21 @@ import CS2114.WindowSide;
  * @author Collin Smith (smithcol)
  * @version 04.18.2017
  */
-public class DisplayWindow 
+public class GUIDisplayWindow 
 {
     private Window window;
     private SongList songList;
-    private SongGUI[] songPanels;
-    private LegendGUI[] legend;
+    private GUISong[] songPanels;
+    private GUILegend[] legend;
     private int panelHeight;
     private int panelWidth;
     
     //fields for the buttons
     private Button prev;
     private Button next;
-    private Button sortByArtistName;
-    private Button sortBySongTitle;
-    private Button sortByGenre;
-    private Button sortByDate;
     private Button hobby;
     private Button major;
     private Button region;
-    private Button quit;
     
     //fields to switch between display slides
     private int slides;
@@ -46,15 +41,15 @@ public class DisplayWindow
      * has buttons for the user to switch the graphic
      * representation
      * 
-     * @param songList
+     * @param sList
      *            is the song list to visualize
      */
-    public DisplayWindow(SongList sList) 
+    public GUIDisplayWindow(SongList sList) 
     {
         window = new Window("Project 5");
         songList = sList;
         // store songs in one slide
-        songPanels = new SongGUI[9];
+        songPanels = new GUISong[9];
         
         // define the size of one single song panel
         panelHeight = window.getGraphPanelHeight() / 5;
@@ -72,7 +67,8 @@ public class DisplayWindow
         setUpLegend();
         
         // welcome text
-        TextShape welcomeText = new TextShape(0, 0, "Click a sort button to get started");
+        TextShape welcomeText = new TextShape(0, 0,
+                                "Click a sort button to get started");
         welcomeText.setBackgroundColor(Color.WHITE);
         welcomeText.setX(
                 (window.getGraphPanelWidth() - welcomeText.getWidth()) / 2);
@@ -84,7 +80,7 @@ public class DisplayWindow
     /**
      * helper method to get the song data for current page
      * 
-     * @param currentPage - the current page number
+     * @param currSlide - the current page number
      */
     private void getSlide(int currSlide) 
     {
@@ -96,7 +92,7 @@ public class DisplayWindow
         for (int i = (currSlide - 1) * 9, j = 0; i < songList.size()
                 && j < 9; i++, j++) 
         {
-            songPanels[j] = new SongGUI(songList.getAt(i), getX(j),
+            songPanels[j] = new GUISong(songList.getAt(i), getX(j),
                     getY(j), panelWidth);
         }
     }
@@ -151,16 +147,16 @@ public class DisplayWindow
         next.onClick(this, "clickedNext");
         next.disable();
 
-        sortByArtistName = new Button("Sort by Artist Name");
+        Button sortByArtistName = new Button("Sort by Artist Name");
         sortByArtistName.onClick(this, "clickedSortByArtistName");
 
-        sortBySongTitle = new Button("Sort by Song Title");
+        Button sortBySongTitle = new Button("Sort by Song Title");
         sortBySongTitle.onClick(this, "clickedSortBySongTitle");
 
-        sortByGenre = new Button("Sort by Genre");
+        Button sortByGenre = new Button("Sort by Genre");
         sortByGenre.onClick(this, "clickedSortByGenre");
 
-        sortByDate = new Button("Sort by Release Year");
+        Button sortByDate = new Button("Sort by Release Year");
         sortByDate.onClick(this, "clickedSortByDate");
 
         hobby = new Button("Represent Hobby");
@@ -172,7 +168,7 @@ public class DisplayWindow
         region = new Button("Represent Region");
         region.onClick(this, "clickedRegion");
 
-        quit = new Button("Quit");
+        Button quit = new Button("Quit");
         quit.onClick(this, "clickedQuit");
         
         // North side buttons
@@ -222,12 +218,12 @@ public class DisplayWindow
     {
         int x = window.getGraphPanelWidth() * 5 / 6 - 2;
         int y = window.getGraphPanelHeight() / 5;
-        legend = new LegendGUI[3];
-        legend[0] = new LegendGUI("Hobby", x, y,
+        legend = new GUILegend[3];
+        legend[0] = new GUILegend("Hobby", x, y,
                 window.getGraphPanelWidth(), window.getGraphPanelHeight());
-        legend[1] = new LegendGUI("Major", x, y,
+        legend[1] = new GUILegend("Major", x, y,
                 window.getGraphPanelWidth(), window.getGraphPanelHeight());
-        legend[2] = new LegendGUI("Region", x, y,
+        legend[2] = new GUILegend("Region", x, y,
                 window.getGraphPanelWidth(), window.getGraphPanelHeight());
     }
 
@@ -259,7 +255,7 @@ public class DisplayWindow
      * @param prev
      *            Button
      */
-    public void clickedPrev(Button prev) 
+    public void clickedPrev(Button previous) 
     {
         currentSlide--;
         next.enable();
@@ -297,7 +293,7 @@ public class DisplayWindow
      * @param next
      *            Button
      */
-    public void clickedNext(Button next) 
+    public void clickedNext(Button bNext) 
     {
         currentSlide++;
         prev.enable();
@@ -310,7 +306,7 @@ public class DisplayWindow
      * @param sortByTitle
      *            Button
      */
-    public void clickedSortBySongTitle(Button sortByTitle) 
+    public void clickedSortBySongTitle(Button bSortByTitle) 
     {
         window.removeAllShapes();
         songList.insertionSort("sortByTitle");
@@ -326,7 +322,7 @@ public class DisplayWindow
      * @param sortByArtist
      *            Button
      */
-    public void clickedSortByArtistName(Button sortByArtist) 
+    public void clickedSortByArtistName(Button bSortByArtist) 
     {
         window.removeAllShapes();
         songList.insertionSort("sortByArtist");
@@ -342,7 +338,7 @@ public class DisplayWindow
      * @param sortByGenre
      *            Button
      */
-    public void clickedSortByGenre(Button sortByGenre) 
+    public void clickedSortByGenre(Button bSortByGenre) 
     {
         window.removeAllShapes();
         songList.insertionSort("sortByGenre");
@@ -358,7 +354,7 @@ public class DisplayWindow
      * @param sortByDate
      *            Button
      */
-    public void clickedSortByDate(Button sortByDate) 
+    public void clickedSortByDate(Button bSortByDate) 
     {
         window.removeAllShapes();
         songList.insertionSort("sortByDate");
@@ -372,7 +368,7 @@ public class DisplayWindow
      * @param hobby
      *            Button
      */
-    public void clickedHobby(Button hobby) 
+    public void clickedHobby(Button bHobby) 
     {
         legendType = 0;
         currentSlide = 1;
@@ -386,7 +382,7 @@ public class DisplayWindow
      * @param major
      *            Button
      */
-    public void clickedMajor(Button major) 
+    public void clickedMajor(Button bMajor) 
     {
         legendType = 1;
         currentSlide = 1;
@@ -399,7 +395,7 @@ public class DisplayWindow
      * @param region
      *            Button
      */
-    public void clickedRegion(Button region) 
+    public void clickedRegion(Button bRegion) 
     {
         legendType = 2;
         currentSlide = 1;
