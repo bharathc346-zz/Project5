@@ -11,6 +11,8 @@ public class SongTest extends student.TestCase {
     private Song s1;
     private TitleComparator tc;
     private GenreComparator gc;
+    private ArtistComparator ac;
+    private YearComparator yc;
 
 
     /**
@@ -20,6 +22,8 @@ public class SongTest extends student.TestCase {
         s1 = new Song("A", "me", 2017, "rap");
         tc = new TitleComparator();
         gc = new GenreComparator();
+        ac = new ArtistComparator();
+        yc = new YearComparator();
     }
 
 
@@ -137,6 +141,92 @@ public class SongTest extends student.TestCase {
         assertEquals(2, tc.compare(s3, s1));
         assertEquals(43, gc.compare(s2, s3));
         assertEquals(-45, gc.compare(s3, s1));
+        assertEquals(-1, yc.compare(s2, s3));
+        assertEquals(1, yc.compare(s3, s2));
+        assertEquals(6, ac.compare(s2, s3));
     }
 
+
+    /**
+     * test set and getCSHeardPercent and set and getCSLikedPercent
+     */
+    public void testGetSetCSPercent() {
+        s1.setComputerScienceHeardPercent(50);
+        assertEquals(s1.getComputerScienceHeardPercent(), 50);
+        s1.setComputerScienceLikedPercent(60);
+        assertEquals(s1.getComputerScienceLikedPercent(), 60);
+    }
+
+
+    /**
+     * test set and getOtherEngHeardPercent and set and getOtherEngLikedPercent
+     */
+    public void testGetSetOtherEngPercent() {
+        s1.setOtherEngineeringHeardPercent(50);
+        assertEquals(s1.getOtherEngineeringHeardPercent(), 50);
+        s1.setOtherEngineeringLikedPercent(60);
+        assertEquals(s1.getOtherEngineeringLikedPercent(), 60);
+    }
+
+
+    /**
+     * test set and getMathorCMDAPercent and set and getMathOrCMDaLikedPercent
+     */
+    public void testGetSetMathPercent() {
+        s1.setMathOrCMDAHeardPercent(50);
+        assertEquals(s1.getMathOrCMDAHeardPercent(), 50);
+        s1.setMathOrCMDALikedPercent(60);
+        assertEquals(s1.getMathOrCMDALikedPercent(), 60);
+    }
+
+
+    /**
+     * test set and getOtherHeardPercent and set and getOtherLikedPercent
+     */
+    public void testGetSetOtherPercent() {
+        s1.setOtherHeardPercent(50);
+        assertEquals(s1.getOtherHeardPercent(), 50);
+        s1.setOtherLikedPercent(60);
+        assertEquals(s1.getOtherLikedPercent(), 60);
+    }
+    
+    /**
+     * test set and getSeHeardPercent and set and get SeLikedPercent
+     */
+    public void testGetSetSePercent() {
+        s1.setSeHeardPercent(50);
+        assertEquals(s1.getSeHeardPercent(),50);
+        s1.setSeLikedPercent(60);
+        assertEquals(s1.getSeLikedPercent(), 60);
+    }
+    
+    /**
+     * test set and getNeHeardPercent and set and getNeLikedPercent
+     */
+    public void testGetSetNePercent() {
+        s1.setNeHeardPercent(50);
+        assertEquals(s1.getNeHeardPercent(),50);
+        s1.setNeLikedPercent(60);
+        assertEquals(s1.getNeLikedPercent(), 60);
+    }
+    
+    /**
+     * test set and getIntlHeardPercent and set and get IntlLikedPercent
+     */
+    public void testGetSetIntlPercent() {
+        s1.setInlHeardPercent(50);
+        assertEquals(s1.getInlHeardPercent(),50);
+        s1.setInlLikedPercent(60);
+        assertEquals(s1.getInlLikedPercent(), 60);
+    }
+    
+    /**
+     * test set and getUSHeardPercent and set and getUSLikedPercent
+     */
+    public void testGetSetUSPercent() {
+        s1.setUsHeardPercent(50);
+        assertEquals(s1.getUsHeardPercent(),50);
+        s1.setUsLikedPercent(60);
+        assertEquals(s1.getUsLikedPercent(), 60);
+    }
 }

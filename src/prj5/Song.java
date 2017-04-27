@@ -8,10 +8,12 @@ package prj5;
  * @version 2017-04-20
  */
 public class Song {
+
     private String name;
     private String artist;
     private int year;
     private String genre;
+
     private int sportsHeardPercent;
     private int sportsLikedPercent;
     private int readingHeardPercent;
@@ -20,6 +22,24 @@ public class Song {
     private int artLikedPercent;
     private int musicHeardPercent;
     private int musicLikedPercent;
+
+    private int computerScienceHeardPercent;
+    private int computerScienceLikedPercent;
+    private int otherEngineeringHeardPercent;
+    private int otherEngineeringLikedPercent;
+    private int mathOrCMDAHeardPercent;
+    private int mathOrCMDALikedPercent;
+    private int otherHeardPercent;
+    private int otherLikedPercent;
+
+    private int seHeardPercent;
+    private int seLikedPercent;
+    private int neHeardPercent;
+    private int neLikedPercent;
+    private int inlHeardPercent;
+    private int inlLikedPercent;
+    private int usHeardPercent;
+    private int usLikedPercent;
 
 
     /**
@@ -247,5 +267,345 @@ public class Song {
      */
     public int getArtLikedPercent() {
         return this.artLikedPercent;
+    }
+
+
+    /**
+     * get cs heard percent
+     * 
+     * @return computer science heard percent
+     */
+    public int getComputerScienceHeardPercent() {
+        return computerScienceHeardPercent;
+    }
+
+
+    /**
+     * set cs heardpercent
+     * 
+     * @param computerScienceHeardPercent
+     *            csheardpercent
+     */
+    public void setComputerScienceHeardPercent(
+        int computerScienceHeardPercent) {
+        this.computerScienceHeardPercent = computerScienceHeardPercent;
+    }
+
+
+    /**
+     * get percent who liked cs
+     * 
+     * @return percent liked cs
+     */
+    public int getComputerScienceLikedPercent() {
+        return computerScienceLikedPercent;
+    }
+
+
+    /**
+     * set cs liked percent
+     * 
+     * @param computerScienceLikedPercent
+     *            percent
+     */
+    public void setComputerScienceLikedPercent(
+        int computerScienceLikedPercent) {
+        this.computerScienceLikedPercent = computerScienceLikedPercent;
+    }
+
+
+    /**
+     * get other eng heard percent
+     * 
+     * @return other eng heard percent
+     */
+    public int getOtherEngineeringHeardPercent() {
+        return otherEngineeringHeardPercent;
+    }
+
+
+    /**
+     * set other engineering heardpercent
+     * 
+     * @param other
+     *            eng HeardPercent percents
+     */
+    public void setOtherEngineeringHeardPercent(
+        int otherEngineeringHeardPercent) {
+        this.otherEngineeringHeardPercent = otherEngineeringHeardPercent;
+    }
+
+
+    /**
+     * get percent who liked other engineering
+     * 
+     * @return percent liked other eng
+     */
+    public int getOtherEngineeringLikedPercent() {
+        return otherEngineeringLikedPercent;
+    }
+
+
+    /**
+     * set other engineering liked percent
+     * 
+     * @param otherengineeringLikedPercent
+     *            percent
+     */
+    public void setOtherEngineeringLikedPercent(
+        int otherEngineeringLikedPercent) {
+        this.otherEngineeringLikedPercent = otherEngineeringLikedPercent;
+    }
+
+
+    /**
+     * get math heard percent
+     * 
+     * @return percent
+     */
+    public int getMathOrCMDAHeardPercent() {
+        return mathOrCMDAHeardPercent;
+    }
+
+
+    /**
+     * set math percent heard
+     * 
+     * @param mathOrCMDAHeardPercent
+     *            percent
+     */
+    public void setMathOrCMDAHeardPercent(int mathOrCMDAHeardPercent) {
+        this.mathOrCMDAHeardPercent = mathOrCMDAHeardPercent;
+    }
+
+
+    /**
+     * get math percent liked
+     * 
+     * @return math percent liked
+     */
+    public int getMathOrCMDALikedPercent() {
+        return mathOrCMDALikedPercent;
+    }
+
+
+    /**
+     * set math liked perdcent
+     * 
+     * @param mathOrCMDALikedPercent
+     *            percent
+     */
+    public void setMathOrCMDALikedPercent(int mathOrCMDALikedPercent) {
+        this.mathOrCMDALikedPercent = mathOrCMDALikedPercent;
+    }
+
+
+    /**
+     * get other heard percent
+     * 
+     * @return percent
+     */
+    public int getOtherHeardPercent() {
+        return otherHeardPercent;
+    }
+
+
+    /**
+     * set Other heard percent
+     * 
+     * @param otherHeardPercent
+     *            heard percent
+     */
+    public void setOtherHeardPercent(int otherHeardPercent) {
+        this.otherHeardPercent = otherHeardPercent;
+    }
+
+
+    /**
+     * get other liked percent
+     * 
+     * @return percent
+     */
+    public int getOtherLikedPercent() {
+        return otherLikedPercent;
+    }
+
+
+    /**
+     * set other liked percent
+     * 
+     * @param otherLikedPercent
+     *            percent
+     */
+    public void setOtherLikedPercent(int otherLikedPercent) {
+        this.otherLikedPercent = otherLikedPercent;
+    }
+
+
+    /**
+     * SE percent heard
+     * 
+     * @return percent
+     */
+    public int getSeHeardPercent() {
+        return seHeardPercent;
+    }
+
+
+    /**
+     * set SE percent heard
+     * 
+     * @param seHeardPercent
+     *            percent
+     */
+    public void setSeHeardPercent(int seHeardPercent) {
+        this.seHeardPercent = seHeardPercent;
+    }
+
+
+    /**
+     * get SE likedPercent
+     * 
+     * @return percent
+     */
+    public int getSeLikedPercent() {
+        return seLikedPercent;
+    }
+
+
+    /**
+     * get percent liked
+     * 
+     * @param seLikedPercent
+     *            p
+     */
+    public void setSeLikedPercent(int seLikedPercent) {
+        this.seLikedPercent = seLikedPercent;
+    }
+
+
+    /**
+     * get percent heard
+     * 
+     * @return p
+     */
+    public int getNeHeardPercent() {
+        return neHeardPercent;
+    }
+
+
+    /**
+     * set percent heard
+     * 
+     * @param neHeardPercent
+     *            p
+     */
+    public void setNeHeardPercent(int neHeardPercent) {
+        this.neHeardPercent = neHeardPercent;
+    }
+
+
+    /**
+     * get percent liked
+     * 
+     * @return p
+     */
+    public int getNeLikedPercent() {
+        return neLikedPercent;
+    }
+
+
+    /**
+     * set percent liked
+     * 
+     * @param neLikedPercent
+     *            p
+     */
+    public void setNeLikedPercent(int neLikedPercent) {
+        this.neLikedPercent = neLikedPercent;
+    }
+
+
+    /**
+     * get percent heard
+     * 
+     * @return p
+     */
+    public int getInlHeardPercent() {
+        return inlHeardPercent;
+    }
+
+
+    /**
+     * set percent heard
+     * 
+     * @param inlHeardPercent
+     *            p
+     */
+    public void setInlHeardPercent(int inlHeardPercent) {
+        this.inlHeardPercent = inlHeardPercent;
+    }
+
+
+    /**
+     * get percent liked
+     * 
+     * @return p
+     */
+    public int getInlLikedPercent() {
+        return inlLikedPercent;
+    }
+
+
+    /**
+     * set percent liked
+     * 
+     * @param inlLikedPercent
+     *            p
+     */
+    public void setInlLikedPercent(int inlLikedPercent) {
+        this.inlLikedPercent = inlLikedPercent;
+    }
+
+
+    /**
+     * get percent heard
+     * 
+     * @return p
+     */
+    public int getUsHeardPercent() {
+        return usHeardPercent;
+    }
+
+
+    /**
+     * set percent heard
+     * 
+     * @param usHeardPercent
+     *            p
+     */
+    public void setUsHeardPercent(int usHeardPercent) {
+        this.usHeardPercent = usHeardPercent;
+    }
+
+
+    /**
+     * get percent liked
+     * 
+     * @return p
+     */
+    public int getUsLikedPercent() {
+        return usLikedPercent;
+    }
+
+
+    /**
+     * set percent liked
+     * 
+     * @param usLikedPercent
+     *            p
+     */
+    public void setUsLikedPercent(int usLikedPercent) {
+        this.usLikedPercent = usLikedPercent;
     }
 }
